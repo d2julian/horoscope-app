@@ -20,7 +20,7 @@ export default function ZodiacCarousel() {
 
   const PAGE_WIDTH = WINDOW_WIDTH;
   const PAGE_HEIGHT = WINDOW_HEIGHT - 100;
-  const ITEM_WIDTH = PAGE_WIDTH * 0.8;
+  const ITEM_WIDTH = PAGE_WIDTH * 0.75;
 
   const onPressHandler = (index: number) => {
     console.log("click index", index);
@@ -40,6 +40,7 @@ export default function ZodiacCarousel() {
             width: PAGE_WIDTH,
             height: PAGE_HEIGHT,
             alignItems: "center",
+            marginTop: 20,
           }}
           width={ITEM_WIDTH}
           height={ITEM_WIDTH}
