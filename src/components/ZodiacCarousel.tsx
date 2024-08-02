@@ -33,26 +33,24 @@ export default function ZodiacCarousel() {
     const mappedZodiacs: ZodiacCarouselType[] = mapZodiacMainResponseToHoroscopes(data);
 
     return (
-      <ImageBackground source={images.universe} style={{ flex: 1 }} resizeMode="cover">
-        <Carousel
-          vertical
-          style={{
-            width: PAGE_WIDTH,
-            height: PAGE_HEIGHT,
-            alignItems: "center",
-            marginTop: 20,
-          }}
-          width={ITEM_WIDTH}
-          height={ITEM_WIDTH}
-          customAnimation={parallaxLayout({
-            size: ITEM_WIDTH,
-          })}
-          data={mappedZodiacs}
-          renderItem={({ index, item }) => (
-            <ZodiacItem index={index} image={item.image} name={item.name} onPressHandler={onPressHandler} />
-          )}
-        />
-      </ImageBackground>
+      <Carousel
+        vertical
+        style={{
+          width: PAGE_WIDTH,
+          height: PAGE_HEIGHT,
+          alignItems: "center",
+          marginTop: 20,
+        }}
+        width={ITEM_WIDTH}
+        height={ITEM_WIDTH}
+        customAnimation={parallaxLayout({
+          size: ITEM_WIDTH,
+        })}
+        data={mappedZodiacs}
+        renderItem={({ index, item }) => (
+          <ZodiacItem index={index} image={item.image} name={item.name} onPressHandler={onPressHandler} />
+        )}
+      />
     );
   }
 }

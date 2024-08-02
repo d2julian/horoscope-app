@@ -12,6 +12,10 @@ const images = {
   tauro: require("./tauro.png"),
   virgo: require("./virgo.png"),
   universe: require("./bg-sky.jpg"),
+  tarot: require("./tarot.png"),
+  carta_de_tarot: require("./carta-de-tarot.png"),
+  bola_de_cristal: require("./bola-de-cristal.png"),
+  cartas_de_tarot: require("./cartas-de-tarot.png"),
 };
 
 export default images;
