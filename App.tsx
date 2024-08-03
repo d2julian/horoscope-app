@@ -1,5 +1,7 @@
 import NameInserting from "@/components/NameInserting";
 import ZodiacCarousel from "@/components/ZodiacCarousel";
+import { WINDOW_WIDTH } from "@/UI/constants";
+import { theme } from "@/UI/theme";
 import { useFonts, Cinzel_400Regular, Cinzel_700Bold } from "@expo-google-fonts/cinzel";
 import images from "assets/images";
 import React from "react";
@@ -16,12 +18,12 @@ export default function App() {
   }
 
   return (
-    <PaperProvider>
+    <PaperProvider theme={theme}>
       <SafeAreaView style={styles.container}>
         <ImageBackground source={images.universe} style={{ flex: 1 }} resizeMode="cover">
           <NameInserting />
           {/* <ZodiacCarousel /> */}
-          <StatusBar barStyle={"dark-content"} />
+          <StatusBar barStyle={"default"} />
         </ImageBackground>
       </SafeAreaView>
     </PaperProvider>
