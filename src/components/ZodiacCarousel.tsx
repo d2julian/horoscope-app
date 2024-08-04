@@ -1,7 +1,5 @@
 import React, { useEffect } from "react";
-import { ImageBackground } from "react-native";
 import Carousel from "react-native-reanimated-carousel";
-import images from "../../assets/images";
 import { parallaxLayout } from "@/UI/parallax";
 import { WINDOW_WIDTH, WINDOW_HEIGHT } from "@/UI/constants";
 import ZodiacItem from "./ZodiacItem";
@@ -26,33 +24,28 @@ export default function ZodiacCarousel() {
     console.log("click index", index);
   };
 
-  console.log("status", status);
-  console.log("error", error);
-
   if (status === HttpActionKind.COMPLETED && data) {
     const mappedZodiacs: ZodiacCarouselType[] = mapZodiacMainResponseToHoroscopes(data);
 
     return (
-      <ImageBackground source={images.universe} style={{ flex: 1 }} resizeMode="cover">
-        <Carousel
-          vertical
-          style={{
-            width: PAGE_WIDTH,
-            height: PAGE_HEIGHT,
-            alignItems: "center",
-            marginTop: 20,
-          }}
-          width={ITEM_WIDTH}
-          height={ITEM_WIDTH}
-          customAnimation={parallaxLayout({
-            size: ITEM_WIDTH,
-          })}
-          data={mappedZodiacs}
-          renderItem={({ index, item }) => (
-            <ZodiacItem index={index} image={item.image} name={item.name} onPressHandler={onPressHandler} />
-          )}
-        />
-      </ImageBackground>
+      <Carousel
+        vertical
+        style={{
+          width: PAGE_WIDTH,
+          height: PAGE_HEIGHT,
+          alignItems: "center",
+          marginTop: 20,
+        }}
+        width={ITEM_WIDTH}
+        height={ITEM_WIDTH}
+        customAnimation={parallaxLayout({
+          size: ITEM_WIDTH,
+        })}
+        data={mappedZodiacs}
+        renderItem={({ index, item }) => (
+          <ZodiacItem index={index} image={item.image} name={item.name} onPressHandler={onPressHandler} />
+        )}
+      />
     );
   }
 }

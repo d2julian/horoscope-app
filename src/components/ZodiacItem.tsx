@@ -1,18 +1,5 @@
-import {
-  Cinzel_400Regular,
-  Cinzel_700Bold,
-  useFonts,
-} from "@expo-google-fonts/cinzel";
 import React from "react";
-import {
-  ImageBackground,
-  ImageSourcePropType,
-  View,
-  StyleSheet,
-  Text,
-  Pressable,
-  ActivityIndicator,
-} from "react-native";
+import { ImageBackground, ImageSourcePropType, View, StyleSheet, Text, Pressable } from "react-native";
 
 type ZodiacItemProps = {
   index: number;
@@ -21,21 +8,7 @@ type ZodiacItemProps = {
   onPressHandler: Function;
 };
 
-export default function ZodiacItem({
-  index,
-  image,
-  name,
-  onPressHandler,
-}: ZodiacItemProps) {
-  const [fontsLoaded] = useFonts({
-    Cinzel_400Regular,
-    Cinzel_700Bold,
-  });
-
-  if (!fontsLoaded) {
-    return <ActivityIndicator size="large" />;
-  }
-
+export default function ZodiacItem({ index, image, name, onPressHandler }: ZodiacItemProps) {
   const onPress = () => {
     onPressHandler(index);
   };
