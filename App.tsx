@@ -1,8 +1,7 @@
 import NameInserting from "@/components/NameInserting";
 import ZodiacCarousel from "@/components/ZodiacCarousel";
-import { WINDOW_WIDTH } from "@/UI/constants";
 import { theme } from "@/UI/theme";
-import { useFonts, Cinzel_400Regular, Cinzel_700Bold } from "@expo-google-fonts/cinzel";
+import { useFonts, Cinzel_400Regular, Cinzel_700Bold, Cinzel_600SemiBold } from "@expo-google-fonts/cinzel";
 import images from "assets/images";
 import React from "react";
 import { ActivityIndicator, ImageBackground, StatusBar } from "react-native";
@@ -11,7 +10,7 @@ import { PaperProvider } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function App() {
-  const [fontsLoaded] = useFonts({ Cinzel_400Regular, Cinzel_700Bold });
+  const [fontsLoaded] = useFonts({ Cinzel_400Regular, Cinzel_700Bold, Cinzel_600SemiBold });
 
   if (!fontsLoaded) {
     return <ActivityIndicator size="large" />;

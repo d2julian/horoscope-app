@@ -31,9 +31,6 @@ function NameInserting() {
           style={{
             color: theme.colors.onPrimary,
             fontFamily: theme.defaultFont,
-            textShadowColor: "white",
-            textShadowOffset: { width: -1, height: 1 },
-            textShadowRadius: 50,
             textAlign: "center",
           }}
         >
@@ -56,9 +53,21 @@ function NameInserting() {
           Please, type your name
         </Text>
         <TextInput
-          label="Your name"
+          label={
+            <Text
+              variant="titleMedium"
+              style={{
+                color: theme.colors.mediumPrimary,
+                fontFamily: theme.defaultFont,
+                textAlign: "center",
+              }}
+            >
+              Your name
+            </Text>
+          }
           style={{ width: theme.size.largeXXL }}
-          right={
+          contentStyle={{ fontFamily: theme.defaultMediumFont, color: theme.colors.primary }}
+          left={
             <TextInput.Icon
               icon={({ size }) => (
                 <Image
@@ -92,16 +101,3 @@ function NameInserting() {
 }
 
 export default NameInserting;
-
-const styles = StyleSheet.create({
-  zodiacText: {
-    color: "white",
-    fontSize: 20,
-    fontFamily: "Cinzel_700Bold",
-    textAlign: "center",
-    textShadowColor: "white",
-    textShadowOffset: { width: -1, height: 1 },
-    textShadowRadius: 50,
-    textTransform: "uppercase",
-  },
-});

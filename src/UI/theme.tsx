@@ -2,7 +2,6 @@ import { WINDOW_WIDTH } from "@/UI/constants";
 import { MD3LightTheme as DefaultTheme, useTheme } from "react-native-paper";
 export const theme = {
   ...DefaultTheme,
-  myOwnProperty: true,
   roundness: 2,
   size: {
     largeXXL: WINDOW_WIDTH * 0.7,
@@ -22,9 +21,13 @@ export const theme = {
     small: 10,
   },
   defaultFont: "Cinzel_700Bold",
+  defaultRegularFont: "Cinzel_400Regular",
+  defaultMediumFont: "Cinzel_600SemiBold",
   colors: {
     ...DefaultTheme.colors,
-    myOwnColor: "#BADA55",
+    primary: "#4c0080",
+    mediumPrimary: "#8a00e6",
+    lightPrimary: "#c266ff",
   },
 };
 
