@@ -2,11 +2,11 @@ import React, { useEffect } from "react";
 import Carousel from "react-native-reanimated-carousel";
 import { parallaxLayout } from "@/UI/parallax";
 import { WINDOW_WIDTH, WINDOW_HEIGHT } from "@/UI/constants";
-import ZodiacItem from "./ZodiacItem";
-import useHttp from "@/hooks/useHttp";
 import { getAllMainHoroscopes } from "@/lib/api";
 import { HttpActionKind, ZodiacCarouselType, ZodiacMainResponse } from "@/types/types";
 import { mapZodiacMainResponseToHoroscopes } from "@/selectors/mapZodiacMainResponse";
+import ZodiacItem from "./ZodiacItem";
+import useHttp from "@/hooks/useHttp";
 
 export default function ZodiacCarousel() {
   //TODO Añadir esta informacion en un context / state managment y llamarlo al iniicio de la app

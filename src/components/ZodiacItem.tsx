@@ -1,5 +1,5 @@
-import React from "react";
-import { ImageBackground, ImageSourcePropType, View, StyleSheet, Text, Pressable } from "react-native";
+import React, { useEffect, useRef } from "react";
+import { ImageBackground, ImageSourcePropType, View, StyleSheet, Text, Pressable, Animated } from "react-native";
 
 type ZodiacItemProps = {
   index: number;
@@ -12,18 +12,36 @@ export default function ZodiacItem({ index, image, name, onPressHandler }: Zodia
   const onPress = () => {
     onPressHandler(index);
   };
+
+  const fadeAnim = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    Animated.timing(fadeAnim, {
+      toValue: 1,
+      duration: 1000,
+      useNativeDriver: true,
+    }).start();
+  }, [fadeAnim]);
+
   return (
-    <Pressable style={{ flex: 1 }} onPress={onPress}>
-      <ImageBackground source={image} style={{ flex: 1 }} resizeMode="contain">
-        <View
-          style={{
-            flex: 1,
-            justifyContent: "center",
-          }}
-        ></View>
-      </ImageBackground>
-      <Text style={styles.zodiacText}>{name}</Text>
-    </Pressable>
+    <Animated.View
+      style={{
+        flex: 1,
+        opacity: fadeAnim,
+      }}
+    >
+      <Pressable style={{ flex: 1 }} onPress={onPress}>
+        <ImageBackground source={image} style={{ flex: 1 }} resizeMode="contain">
+          <View
+            style={{
+              flex: 1,
+              justifyContent: "center",
+            }}
+          ></View>
+        </ImageBackground>
+        <Text style={styles.zodiacText}>{name}</Text>
+      </Pressable>
+    </Animated.View>
   );
 }
 

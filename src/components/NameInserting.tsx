@@ -1,12 +1,14 @@
 import React from "react";
 import { WINDOW_HEIGHT, WINDOW_WIDTH } from "@/UI/constants";
 import { useAppTheme } from "@/UI/theme";
-import images from "assets/images";
-import { View, StyleSheet, Image } from "react-native";
+import { View, Image } from "react-native";
 import { TextInput, Text, Button } from "react-native-paper";
+import { useNavigation } from "@react-navigation/native";
+import images from "assets/images";
 
 function NameInserting() {
   const theme = useAppTheme();
+  const navigation = useNavigation();
   return (
     <View
       style={{
@@ -89,7 +91,7 @@ function NameInserting() {
           mode="contained"
           contentStyle={{ flexDirection: "row-reverse" }}
           icon="arrow-right-bold-circle"
-          onPress={() => console.log("Pressed")}
+          onPress={() => navigation.navigate("ZodiacCarousel")}
         >
           <Text variant="titleMedium" style={{ color: theme.colors.onPrimary, fontFamily: theme.defaultFont }}>
             Next
