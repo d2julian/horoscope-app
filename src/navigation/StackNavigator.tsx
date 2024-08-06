@@ -1,8 +1,8 @@
 // navigation/StackNavigator.tsx
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import NameInserting from "@/components/NameInserting";
-import ZodiacCarousel from "@/components/ZodiacCarousel";
+import NameInserting from "@/screens/NameInserting";
+import ZodiacCarousel from "@/screens/ZodiacCarousel";
 
 const Stack = createNativeStackNavigator();
 

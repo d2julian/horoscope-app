@@ -11,6 +11,7 @@ export const theme = {
     small: WINDOW_WIDTH * 0.3,
   },
   iconSize: {
+    largeXL: 100,
     large: 80,
     medium: 50,
     small: 25,

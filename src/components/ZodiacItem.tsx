@@ -1,36 +1,29 @@
-import React, { useEffect, useRef } from "react";
-import { ImageBackground, ImageSourcePropType, View, StyleSheet, Text, Pressable, Animated } from "react-native";
+import React from "react";
+import { ImageBackground, ImageSourcePropType, View, StyleSheet, Text, Pressable } from "react-native";
+import { AppTheme, useAppTheme } from "@/UI/theme";
 
 type ZodiacItemProps = {
   index: number;
   image: ImageSourcePropType;
   name: string;
+  isSelected: boolean;
   onPressHandler: Function;
 };
 
-export default function ZodiacItem({ index, image, name, onPressHandler }: ZodiacItemProps) {
+export default function ZodiacItem({ index, image, name, isSelected, onPressHandler }: ZodiacItemProps) {
   const onPress = () => {
     onPressHandler(index);
   };
 
-  const fadeAnim = useRef(new Animated.Value(0)).current;
-
-  useEffect(() => {
-    Animated.timing(fadeAnim, {
-      toValue: 1,
-      duration: 1000,
-      useNativeDriver: true,
-    }).start();
-  }, [fadeAnim]);
+  const theme = useAppTheme();
 
   return (
-    <Animated.View
+    <View
       style={{
         flex: 1,
-        opacity: fadeAnim,
       }}
     >
-      <Pressable style={{ flex: 1 }} onPress={onPress}>
+      <Pressable style={[styles.pressable, isSelected ? styles.stylePressableSelected : null]} onPress={onPress}>
         <ImageBackground source={image} style={{ flex: 1 }} resizeMode="contain">
           <View
             style={{
@@ -41,7 +34,7 @@ export default function ZodiacItem({ index, image, name, onPressHandler }: Zodia
         </ImageBackground>
         <Text style={styles.zodiacText}>{name}</Text>
       </Pressable>
-    </Animated.View>
+    </View>
   );
 }
 
@@ -55,5 +48,12 @@ const styles = StyleSheet.create({
     textShadowOffset: { width: -1, height: 1 },
     textShadowRadius: 50,
     textTransform: "uppercase",
+  },
+  pressable: {
+    flex: 1,
+    opacity: 0.5,
+  },
+  stylePressableSelected: {
+    opacity: 1,
   },
 });
