@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import { WINDOW_HEIGHT, WINDOW_WIDTH } from "@/UI/constants";
 import { useAppTheme } from "@/UI/theme";
 import { View, Image } from "react-native";
-import { TextInput, Text, Button, HelperText } from "react-native-paper";
-import { useNavigation } from "@react-navigation/native";
-import images from "assets/images";
+import { TextInput, Text, HelperText } from "react-native-paper";
 import CustomButton from "@/components/CustomButton";
+import { useAppNavigation } from "@/hooks/useAppNavigation";
+import images from "assets/images";
 
 function NameInserting() {
   const theme = useAppTheme();
-  const navigation = useNavigation();
+  const navigation = useAppNavigation();
 
   const [nameInput, setNameInput] = useState<string>("");
   const [errorInput, setErrorInput] = useState<string>("");

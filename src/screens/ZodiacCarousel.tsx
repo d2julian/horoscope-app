@@ -1,16 +1,17 @@
 import React, { useEffect, useRef, useState } from "react";
+import { Animated, View } from "react-native";
+import Carousel from "react-native-reanimated-carousel";
 import { HelperText } from "react-native-paper";
 import { useAppTheme } from "@/UI/theme";
-import Carousel from "react-native-reanimated-carousel";
 import { parallaxLayout } from "@/UI/parallax";
 import { WINDOW_WIDTH, WINDOW_HEIGHT } from "@/UI/constants";
 import { getAllMainHoroscopes } from "@/lib/api";
 import { HttpActionKind, ZodiacCarouselType, ZodiacMainResponse } from "@/types/types";
 import { mapZodiacMainResponseToHoroscopes } from "@/selectors/mapZodiacMainResponse";
 import useHttp from "@/hooks/useHttp";
-import { Animated, View } from "react-native";
 import CustomButton from "@/components/CustomButton";
 import ZodiacItem from "@/components/ZodiacItem";
+import { useAppNavigation } from "@/hooks/useAppNavigation";
 
 export default function ZodiacCarousel() {
   //TODO Añadir esta informacion en un context / state managment y llamarlo al inicio de la app
@@ -18,6 +19,7 @@ export default function ZodiacCarousel() {
   const [zodiacIndexSelected, setzodiacIndexSelected] = useState<number>();
   const [errorInput, setErrorInput] = useState<string>("");
   const theme = useAppTheme();
+  const navigation = useAppNavigation();
   const fadeAnim = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
@@ -35,6 +37,8 @@ export default function ZodiacCarousel() {
   const onPressButtonHandler = () => {
     if (zodiacIndexSelected === null || zodiacIndexSelected === undefined) {
       setErrorInput("Debes seleccionar un zodiaco para continuar");
+    } else {
+      navigation.navigate("ZodiacTabs");
     }
   };
 
