@@ -11,6 +11,7 @@ export const theme = {
     small: WINDOW_WIDTH * 0.3,
   },
   iconSize: {
+    largeXL: 100,
     large: 80,
     medium: 50,
     small: 25,
@@ -19,6 +20,11 @@ export const theme = {
     large: 30,
     medium: 20,
     small: 10,
+  },
+  fontSize: {
+    large: 15,
+    medium: 10,
+    small: 8,
   },
   defaultFont: "Cinzel_700Bold",
   defaultRegularFont: "Cinzel_400Regular",

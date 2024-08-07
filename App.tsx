@@ -1,13 +1,15 @@
-import NameInserting from "@/components/NameInserting";
-import ZodiacCarousel from "@/components/ZodiacCarousel";
-import { theme } from "@/UI/theme";
-import { useFonts, Cinzel_400Regular, Cinzel_700Bold, Cinzel_600SemiBold } from "@expo-google-fonts/cinzel";
-import images from "assets/images";
+// App.tsx
 import React from "react";
-import { ActivityIndicator, ImageBackground, StatusBar } from "react-native";
+import { ActivityIndicator, ImageBackground } from "react-native";
+import { StatusBar } from "expo-status-bar";
 import { StyleSheet } from "react-native";
 import { PaperProvider } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
+import { useFonts, Cinzel_400Regular, Cinzel_700Bold, Cinzel_600SemiBold } from "@expo-google-fonts/cinzel";
+import StackNavigator from "@/navigation/StackNavigator";
+import { theme } from "@/UI/theme";
+import images from "assets/images";
 
 export default function App() {
   const [fontsLoaded] = useFonts({ Cinzel_400Regular, Cinzel_700Bold, Cinzel_600SemiBold });
@@ -16,15 +18,24 @@ export default function App() {
     return <ActivityIndicator size="large" />;
   }
 
+  const navTheme = {
+    ...DefaultTheme,
+    colors: {
+      ...DefaultTheme.colors,
+      background: "transparent",
+    },
+  };
+
   return (
     <PaperProvider theme={theme}>
-      <SafeAreaView style={styles.container}>
-        <ImageBackground source={images.universe} style={{ flex: 1 }} resizeMode="cover">
-          <NameInserting />
-          {/* <ZodiacCarousel /> */}
-          <StatusBar barStyle={"default"} />
-        </ImageBackground>
-      </SafeAreaView>
+      <ImageBackground source={images.universe} style={{ flex: 1 }} resizeMode="cover">
+        <NavigationContainer theme={navTheme}>
+          <SafeAreaView style={styles.container}>
+            <StackNavigator />
+            <StatusBar style="light" backgroundColor={theme.colors.primary} />
+          </SafeAreaView>
+        </NavigationContainer>
+      </ImageBackground>
     </PaperProvider>
   );
 }
@@ -32,7 +43,6 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
     justifyContent: "center",
   },
 });
