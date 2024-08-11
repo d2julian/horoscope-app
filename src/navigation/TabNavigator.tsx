@@ -1,7 +1,6 @@
 import React from "react";
 import { StyleSheet } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Image } from "react-native";
 import AllZodiac from "@/screens/AllZodiac";
 import Zodiac from "@/screens/Zodiac";
 import { AppTheme, useAppTheme } from "@/UI/theme";
