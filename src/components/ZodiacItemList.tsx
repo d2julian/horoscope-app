@@ -20,9 +20,10 @@ const styles = StyleSheet.create({
   itemContainer: {
     justifyContent: "center",
     alignItems: "center",
-    width: WINDOW_WIDTH / 6,
+    width: WINDOW_WIDTH / 4,
     margin: 5,
-    paddingVertical: 20,
+    paddingVertical: 15,
+    opacity: 0.9,
   },
   image: {
     height: WINDOW_WIDTH / 5,
@@ -30,7 +31,7 @@ const styles = StyleSheet.create({
   },
   text: {
     color: "white",
-    fontSize: 13,
+    fontSize: 12,
     fontFamily: "Cinzel_700Bold",
     textAlign: "center",
   },

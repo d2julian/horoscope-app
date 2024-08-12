@@ -20,7 +20,7 @@ export default function ZodiacTabs() {
         tabBarActiveTintColor: theme.colors.primary,
         tabBarInactiveTintColor: theme.colors.surfaceDisabled,
         tabBarStyle: {
-          height: 50,
+          height: 56,
           backgroundColor: "white",
           borderTopWidth: 1,
           borderBottomWidth: 1,
@@ -62,6 +62,6 @@ const makeStyles = ({ defaultFont, fontSize }: AppTheme) =>
   StyleSheet.create({
     tabBarLabelStyle: {
       fontFamily: defaultFont,
-      fontSize: fontSize.medium,
+      fontSize: fontSize.small,
     },
   });

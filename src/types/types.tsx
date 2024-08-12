@@ -16,6 +16,7 @@ type ZodiacData = {
   url: string;
   weaknesses: string;
   zodiac: string;
+  index: number;
 };
 
 export type ZodiacMainResponse = {
@@ -37,4 +38,5 @@ export enum HttpActionKind {
 export type ZodiacCarouselType = {
   name: string;
   image: ImageSourcePropType;
+  index: number;
 };
