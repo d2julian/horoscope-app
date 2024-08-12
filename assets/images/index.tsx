@@ -18,6 +18,7 @@ const images = {
   cartas_de_tarot: require("./cartas-de-tarot.png"),
   zodiacs: require("./zodiacs.png"),
   compatibilidad: require("./compatibilidad.png"),
+  constelacion: require("./constelacion.png"),
 };
 
 export default images;

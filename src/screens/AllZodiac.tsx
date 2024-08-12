@@ -1,13 +1,17 @@
-import { StyleSheet, View } from "react-native";
+import { ImageBackground, StyleSheet, View } from "react-native";
 import React from "react";
 
 import ZodiacList from "@/components/ZodiacList";
+import images from "assets/images";
 
 const AllZodiac = () => {
   return (
-    <View style={styles.container}>
-      <ZodiacList />
-    </View>
+    <>
+      <ImageBackground source={images.constelacion} style={styles.secondaryBackground} resizeMode="cover" />
+      <View style={styles.container}>
+        <ZodiacList />
+      </View>
+    </>
   );
 };
 
@@ -19,5 +23,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingVertical: 20,
     paddingHorizontal: 10,
+  },
+  secondaryBackground: {
+    ...StyleSheet.absoluteFillObject,
+    opacity: 0.3,
   },
 });

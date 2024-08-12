@@ -1,5 +1,5 @@
-import { Image, ImageSourcePropType, StyleSheet, Text, View } from "react-native";
-import React from "react";
+import React, { useRef } from "react";
+import { Animated, Image, ImageSourcePropType, StyleSheet, Text, TouchableWithoutFeedback, View } from "react-native";
 import { WINDOW_WIDTH } from "@/UI/constants";
 
 type ZodiacItemListProps = {
@@ -8,11 +8,30 @@ type ZodiacItemListProps = {
 };
 
 export default function ZodiacItemList({ image, name }: ZodiacItemListProps) {
+  const scaleAnim = useRef(new Animated.Value(1)).current;
+  const onPressHandlerAnimation = () => {
+    Animated.timing(scaleAnim, {
+      toValue: 1.1,
+      duration: 50,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  const onPressOutHandlerAnimation = () => {
+    Animated.timing(scaleAnim, {
+      toValue: 1,
+      duration: 50,
+      useNativeDriver: true,
+    }).start();
+  };
+
   return (
-    <View style={styles.itemContainer}>
-      <Image source={image} style={styles.image} />
-      <Text style={styles.text}>{name}</Text>
-    </View>
+    <TouchableWithoutFeedback onPressIn={onPressHandlerAnimation} onPressOut={onPressOutHandlerAnimation}>
+      <Animated.View style={[styles.itemContainer, { transform: [{ scale: scaleAnim }] }]}>
+        <Image source={image} style={styles.image} />
+        <Text style={styles.text}>{name}</Text>
+      </Animated.View>
+    </TouchableWithoutFeedback>
   );
 }
 
