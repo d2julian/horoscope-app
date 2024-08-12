@@ -17,6 +17,7 @@ export default function ZodiacTabs() {
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
+        animation: "shift",
         tabBarActiveTintColor: theme.colors.primary,
         tabBarInactiveTintColor: theme.colors.surfaceDisabled,
         tabBarStyle: {
