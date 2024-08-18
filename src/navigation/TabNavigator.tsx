@@ -1,7 +1,6 @@
 import React from "react";
 import { StyleSheet } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Image } from "react-native";
 import AllZodiac from "@/screens/AllZodiac";
 import Zodiac from "@/screens/Zodiac";
 import { AppTheme, useAppTheme } from "@/UI/theme";
@@ -18,10 +17,11 @@ export default function ZodiacTabs() {
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
+        animation: "shift",
         tabBarActiveTintColor: theme.colors.primary,
         tabBarInactiveTintColor: theme.colors.surfaceDisabled,
         tabBarStyle: {
-          height: 50,
+          height: 56,
           backgroundColor: "white",
           borderTopWidth: 1,
           borderBottomWidth: 1,
@@ -63,6 +63,6 @@ const makeStyles = ({ defaultFont, fontSize }: AppTheme) =>
   StyleSheet.create({
     tabBarLabelStyle: {
       fontFamily: defaultFont,
-      fontSize: fontSize.medium,
+      fontSize: fontSize.small,
     },
   });

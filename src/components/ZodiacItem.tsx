@@ -1,6 +1,5 @@
 import React from "react";
 import { ImageBackground, ImageSourcePropType, View, StyleSheet, Text, Pressable } from "react-native";
-import { AppTheme, useAppTheme } from "@/UI/theme";
 
 type ZodiacItemProps = {
   index: number;
@@ -15,8 +14,6 @@ export default function ZodiacItem({ index, image, name, isSelected, onPressHand
     onPressHandler(index);
   };
 
-  const theme = useAppTheme();
-
   return (
     <View
       style={{
@@ -24,16 +21,9 @@ export default function ZodiacItem({ index, image, name, isSelected, onPressHand
       }}
     >
       <Pressable style={[styles.pressable, isSelected ? styles.stylePressableSelected : null]} onPress={onPress}>
-        <ImageBackground source={image} style={{ flex: 1 }} resizeMode="contain">
-          <View
-            style={{
-              flex: 1,
-              justifyContent: "center",
-            }}
-          ></View>
-        </ImageBackground>
-        <Text style={styles.zodiacText}>{name}</Text>
+        <ImageBackground source={image} style={{ flex: 1 }} resizeMode="contain" />
       </Pressable>
+      <Text style={styles.zodiacText}>{name}</Text>
     </View>
   );
 }

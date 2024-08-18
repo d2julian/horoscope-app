@@ -38,7 +38,10 @@ export default function ZodiacCarousel() {
     if (zodiacIndexSelected === null || zodiacIndexSelected === undefined) {
       setErrorInput("Debes seleccionar un zodiaco para continuar");
     } else {
-      navigation.navigate("ZodiacTabs");
+      navigation.reset({
+        index: 0,
+        routes: [{ name: "ZodiacTabs" }],
+      });
     }
   };
 
