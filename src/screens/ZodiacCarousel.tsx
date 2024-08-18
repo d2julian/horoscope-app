@@ -5,26 +5,20 @@ import { HelperText } from "react-native-paper";
 import { useAppTheme } from "@/UI/theme";
 import { parallaxLayout } from "@/UI/parallax";
 import { WINDOW_WIDTH, WINDOW_HEIGHT } from "@/UI/constants";
-import { getAllMainHoroscopes } from "@/lib/api";
-import { HttpActionKind, ZodiacCarouselType, ZodiacMainResponse } from "@/types/types";
-import { mapZodiacMainResponseToHoroscopes } from "@/selectors/mapZodiacMainResponse";
-import useHttp from "@/hooks/useHttp";
 import CustomButton from "@/components/CustomButton";
 import ZodiacItem from "@/components/ZodiacItem";
 import { useAppNavigation } from "@/hooks/useAppNavigation";
+import { useHoroscopeStore } from "@/store/useHoroscopeStore ";
 
 export default function ZodiacCarousel() {
-  //TODO Añadir esta informacion en un context / state managment y llamarlo al inicio de la app
-  const { sendRequest, status, data, error } = useHttp<ZodiacMainResponse>(getAllMainHoroscopes);
+  const setMainZodiac = useHoroscopeStore((state) => state.setMainZodiac);
+  const zodiacs = useHoroscopeStore((state) => state.zodiacs);
+
   const [zodiacIndexSelected, setzodiacIndexSelected] = useState<number>();
   const [errorInput, setErrorInput] = useState<string>("");
   const theme = useAppTheme();
   const navigation = useAppNavigation();
   const fadeAnim = useRef(new Animated.Value(0)).current;
-
-  useEffect(() => {
-    sendRequest();
-  }, [sendRequest]);
 
   useEffect(() => {
     Animated.timing(fadeAnim, {
@@ -38,6 +32,7 @@ export default function ZodiacCarousel() {
     if (zodiacIndexSelected === null || zodiacIndexSelected === undefined) {
       setErrorInput("Debes seleccionar un zodiaco para continuar");
     } else {
+      setMainZodiac(zodiacs[zodiacIndexSelected].name);
       navigation.reset({
         index: 0,
         routes: [{ name: "ZodiacTabs" }],
@@ -66,44 +61,40 @@ export default function ZodiacCarousel() {
     }
   };
 
-  if (status === HttpActionKind.COMPLETED && data) {
-    const mappedZodiacs: ZodiacCarouselType[] = mapZodiacMainResponseToHoroscopes(data);
-
-    return (
-      <Animated.View style={{ flex: 1, justifyContent: "center", alignItems: "center", opacity: fadeAnim }}>
-        <Carousel
-          vertical
-          style={{
-            width: PAGE_WIDTH,
-            height: PAGE_HEIGHT,
-            alignItems: "center",
-            marginTop: 20,
-          }}
-          width={ITEM_WIDTH}
-          height={ITEM_WIDTH}
-          customAnimation={parallaxLayout({
-            size: ITEM_WIDTH,
-          })}
-          data={mappedZodiacs}
-          renderItem={({ index, item }) => (
-            <ZodiacItem
-              index={index}
-              image={item.image}
-              name={item.name}
-              isSelected={zodiacIndexSelected === index}
-              onPressHandler={onPressHandler}
-            />
-          )}
-        />
-        <HelperText type="error" style={{ fontWeight: "bold" }} visible={inputHasErrors()}>
-          {errorInput}
-        </HelperText>
-        <View style={{ padding: 20, width: theme.size.largeXL }}>
-          <CustomButton callback={onPressButtonHandler} enabled={buttonIsEnabled()}>
-            Next
-          </CustomButton>
-        </View>
-      </Animated.View>
-    );
-  }
+  return (
+    <Animated.View style={{ flex: 1, justifyContent: "center", alignItems: "center", opacity: fadeAnim }}>
+      <Carousel
+        vertical
+        style={{
+          width: PAGE_WIDTH,
+          height: PAGE_HEIGHT,
+          alignItems: "center",
+          marginTop: 20,
+        }}
+        width={ITEM_WIDTH}
+        height={ITEM_WIDTH}
+        customAnimation={parallaxLayout({
+          size: ITEM_WIDTH,
+        })}
+        data={zodiacs}
+        renderItem={({ index, item }) => (
+          <ZodiacItem
+            index={index}
+            image={item.image}
+            name={item.name}
+            isSelected={zodiacIndexSelected === index}
+            onPressHandler={onPressHandler}
+          />
+        )}
+      />
+      <HelperText type="error" style={{ fontWeight: "bold" }} visible={inputHasErrors()}>
+        {errorInput}
+      </HelperText>
+      <View style={{ padding: 20, width: theme.size.largeXL }}>
+        <CustomButton callback={onPressButtonHandler} enabled={buttonIsEnabled()}>
+          Next
+        </CustomButton>
+      </View>
+    </Animated.View>
+  );
 }

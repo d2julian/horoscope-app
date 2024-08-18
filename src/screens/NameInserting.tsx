@@ -6,10 +6,12 @@ import { TextInput, Text, HelperText } from "react-native-paper";
 import CustomButton from "@/components/CustomButton";
 import { useAppNavigation } from "@/hooks/useAppNavigation";
 import images from "assets/images";
+import { useHoroscopeStore } from "@/store/useHoroscopeStore ";
 
 function NameInserting() {
   const theme = useAppTheme();
   const navigation = useAppNavigation();
+  const setUserName = useHoroscopeStore((status) => status.setUserName);
 
   const [nameInput, setNameInput] = useState<string>("");
   const [errorInput, setErrorInput] = useState<string>("");
@@ -35,6 +37,7 @@ function NameInserting() {
     if (nameInput === "" || nameInput === undefined) {
       setErrorInput("Debes introducir un nombre antes de continuar");
     } else {
+      setUserName(nameInput);
       navigation.navigate("ZodiacCarousel");
     }
   };
