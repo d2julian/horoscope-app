@@ -7,9 +7,13 @@ import ZodiacTabs from "./TabNavigator";
 
 const Stack = createNativeStackNavigator();
 
-function StackNavigator() {
+type StackNavigatorProps = {
+  initialRouteName: string;
+};
+
+function StackNavigator({ initialRouteName }: StackNavigatorProps) {
   return (
-    <Stack.Navigator initialRouteName="NameInserting">
+    <Stack.Navigator initialRouteName={initialRouteName}>
       <Stack.Screen
         options={{
           headerShown: false,

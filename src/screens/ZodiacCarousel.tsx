@@ -4,11 +4,12 @@ import Carousel from "react-native-reanimated-carousel";
 import { HelperText } from "react-native-paper";
 import { useAppTheme } from "@/UI/theme";
 import { parallaxLayout } from "@/UI/parallax";
-import { WINDOW_WIDTH, WINDOW_HEIGHT } from "@/UI/constants";
+import { WINDOW_WIDTH, WINDOW_HEIGHT, STORED_ZODIAC_KEY } from "@/UI/constants";
 import CustomButton from "@/components/CustomButton";
 import ZodiacItem from "@/components/ZodiacItem";
 import { useAppNavigation } from "@/hooks/useAppNavigation";
 import { useHoroscopeStore } from "@/store/useHoroscopeStore ";
+import { storeData } from "@/store/phoneStorage";
 
 export default function ZodiacCarousel() {
   const setMainZodiac = useHoroscopeStore((state) => state.setMainZodiac);
@@ -32,6 +33,7 @@ export default function ZodiacCarousel() {
     if (zodiacIndexSelected === null || zodiacIndexSelected === undefined) {
       setErrorInput("Debes seleccionar un zodiaco para continuar");
     } else {
+      storeData(STORED_ZODIAC_KEY, zodiacs[zodiacIndexSelected].name);
       setMainZodiac(zodiacs[zodiacIndexSelected].name);
       navigation.reset({
         index: 0,

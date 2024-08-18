@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { WINDOW_HEIGHT, WINDOW_WIDTH } from "@/UI/constants";
+import { STORED_USER_NAME, WINDOW_HEIGHT, WINDOW_WIDTH } from "@/UI/constants";
 import { useAppTheme } from "@/UI/theme";
 import { View, Image } from "react-native";
 import { TextInput, Text, HelperText } from "react-native-paper";
@@ -7,6 +7,7 @@ import CustomButton from "@/components/CustomButton";
 import { useAppNavigation } from "@/hooks/useAppNavigation";
 import images from "assets/images";
 import { useHoroscopeStore } from "@/store/useHoroscopeStore ";
+import { storeData } from "@/store/phoneStorage";
 
 function NameInserting() {
   const theme = useAppTheme();
@@ -37,6 +38,7 @@ function NameInserting() {
     if (nameInput === "" || nameInput === undefined) {
       setErrorInput("Debes introducir un nombre antes de continuar");
     } else {
+      storeData(STORED_USER_NAME, nameInput);
       setUserName(nameInput);
       navigation.navigate("ZodiacCarousel");
     }
