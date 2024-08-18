@@ -1,17 +1,9 @@
 import { create } from "zustand";
 
-import { ZodiacCarouselType, ZodiacMainResponse } from "@/types/types";
+import { HttpActionKind, ZodiacCarouselType, ZodiacMainResponse } from "@/types/types";
 import { mapZodiacMainResponseToHoroscopes } from "@/selectors/mapZodiacMainResponse";
 
-enum HttpActionKind {
-  SEND = "SEND",
-  SUCCESS = "SUCCESS",
-  ERROR = "ERROR",
-  PENDING = "PENDING",
-  COMPLETED = "COMPLETED",
-}
-
-interface HttpStore {
+type HoroscopeStoreType = {
   sendRequest: (requestFunction: () => Promise<ZodiacMainResponse>) => Promise<void>;
   resetState: () => void;
   setMainZodiac: (zodiac: string) => void;
@@ -24,9 +16,9 @@ interface HttpStore {
   status: HttpActionKind | null;
   userName: string | null;
   mainZodiac: string | null;
-}
+};
 
-export const useHoroscopeStore = create<HttpStore>((set) => ({
+export const useHoroscopeStore = create<HoroscopeStoreType>((set) => ({
   data: null,
   error: null,
   status: null,
