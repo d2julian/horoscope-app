@@ -4,7 +4,7 @@ type Characteristic = {
   [key: string]: string;
 };
 
-type ZodiacData = {
+export type ZodiacData = {
   all_characteristics: Characteristic[];
   attribute: string;
   dislikes: string;

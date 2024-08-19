@@ -8,6 +8,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import { useFonts, Cinzel_400Regular, Cinzel_700Bold, Cinzel_600SemiBold } from "@expo-google-fonts/cinzel";
 import StackNavigator from "@/navigation/StackNavigator";
+import { useShallow } from "zustand/react/shallow";
 import { theme } from "@/UI/theme";
 import images from "assets/images";
 import { getAllMainHoroscopes } from "@/lib/api";
@@ -18,17 +19,23 @@ import { STORED_USER_NAME, STORED_ZODIAC_KEY } from "@/UI/constants";
 
 export default function App() {
   const [fontsLoaded] = useFonts({ Cinzel_400Regular, Cinzel_700Bold, Cinzel_600SemiBold });
-  const sendRequest = useHoroscopeStore((state) => state.sendRequest);
-  const setUserName = useHoroscopeStore((state) => state.setUserName);
-  const setMainZodiac = useHoroscopeStore((state) => state.setMainZodiac);
-  const userName = useHoroscopeStore((state) => state.userName);
-  const mainZodiac = useHoroscopeStore((state) => state.mainZodiac);
-  const error = useHoroscopeStore((state) => state.error);
-  const status = useHoroscopeStore((state) => state.status);
+
+  const [sendRequest, setUserName, setMainZodiac, userName, mainZodiac, error, status] = useHoroscopeStore(
+    useShallow((state) => [
+      state.sendRequest,
+      state.setUserName,
+      state.setMainZodiac,
+      state.userName,
+      state.mainZodiac,
+      state.error,
+      state.status,
+    ])
+  );
 
   const [isLoadingStorageData, setIsLoadingStorageData] = useState(false);
 
   useEffect(() => {
+    clearAsyncStorage();
     sendRequest(getAllMainHoroscopes);
   }, [sendRequest]);
 
