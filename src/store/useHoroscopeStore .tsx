@@ -1,30 +1,50 @@
-import { create } from "zustand";
+import { create, StateCreator } from "zustand";
 
 import { HttpActionKind, ZodiacCarouselType, ZodiacMainResponse } from "@/types/types";
 import { mapZodiacMainResponseToHoroscopes } from "@/selectors/mapZodiacMainResponse";
 
-type HoroscopeStoreType = {
-  sendRequest: (requestFunction: () => Promise<ZodiacMainResponse>) => Promise<void>;
-  resetState: () => void;
+type GeneralInfoStoreType = {
   setMainZodiac: (zodiac: string) => void;
   setUserName: (name: string) => void;
-  responseData?: ZodiacMainResponse;
+  userName: string | null;
+  mainZodiac: string | null;
+};
+
+type MainHoroscopeStoreType = {
+  sendRequest: (requestFunction: () => Promise<ZodiacMainResponse>) => Promise<void>;
   errorMessage?: string;
   data: ZodiacMainResponse | null;
   zodiacs: ZodiacCarouselType[];
   error: string | null;
   status: HttpActionKind | null;
-  userName: string | null;
-  mainZodiac: string | null;
 };
 
-export const useHoroscopeStore = create<HoroscopeStoreType>((set) => ({
+const createGeneralHoroscopeSlice: StateCreator<
+  MainHoroscopeStoreType & GeneralInfoStoreType,
+  [],
+  [],
+  GeneralInfoStoreType
+> = (set) => ({
+  userName: null,
+  mainZodiac: null,
+  setUserName: (name: string) => {
+    set({ userName: name });
+  },
+  setMainZodiac: (zodiac: string) => {
+    set({ mainZodiac: zodiac });
+  },
+});
+
+const createMainHoroscopeSlice: StateCreator<
+  MainHoroscopeStoreType & GeneralInfoStoreType,
+  [],
+  [],
+  MainHoroscopeStoreType
+> = (set) => ({
   data: null,
   error: null,
   status: null,
   zodiacs: [],
-  userName: null,
-  mainZodiac: null,
 
   sendRequest: async (requestFunction: () => Promise<ZodiacMainResponse>) => {
     set({ status: HttpActionKind.PENDING, error: null, data: null });
@@ -41,15 +61,9 @@ export const useHoroscopeStore = create<HoroscopeStoreType>((set) => ({
       set({ error: errorMessage, status: HttpActionKind.COMPLETED });
     }
   },
+});
 
-  setUserName: (name: string) => {
-    set({ userName: name });
-  },
-  setMainZodiac: (zodiac: string) => {
-    set({ mainZodiac: zodiac });
-  },
-
-  resetState: () => {
-    set({ data: null, error: null, status: null });
-  },
+export const useHoroscopeStore = create<GeneralInfoStoreType & MainHoroscopeStoreType>()((...a) => ({
+  ...createGeneralHoroscopeSlice(...a),
+  ...createMainHoroscopeSlice(...a),
 }));
