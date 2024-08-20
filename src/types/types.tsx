@@ -40,3 +40,28 @@ export type ZodiacCarouselType = {
   image: ImageSourcePropType;
   index: number;
 };
+
+type LuckyElement = {
+  lucky_element: string;
+  total_stars_empty: number;
+  total_stars_filled: number;
+};
+
+type ZodiacCompatibilityElement = {
+  element: string;
+  zodiac_compatible: string;
+};
+
+type HoroscopeData = {
+  horoscope: string;
+  index: number;
+  lucky_elements: LuckyElement[];
+  timestamp: string;
+  url: string;
+  zodiac: string;
+  zodiac_compatibility_elements: ZodiacCompatibilityElement[];
+};
+
+export type ZodiacDailyResponse = {
+  [key: string]: HoroscopeData;
+};

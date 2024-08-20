@@ -11,7 +11,7 @@ import StackNavigator from "@/navigation/StackNavigator";
 import { useShallow } from "zustand/react/shallow";
 import { theme } from "@/UI/theme";
 import images from "assets/images";
-import { getAllMainHoroscopes } from "@/lib/api";
+import { getAllDailyHoroscopes, getAllMainHoroscopes } from "@/lib/api";
 import { useHoroscopeStore } from "@/store/useHoroscopeStore ";
 import { HttpActionKind } from "@/types/types";
 import { clearAsyncStorage, getData } from "@/store/phoneStorage";
@@ -20,15 +20,27 @@ import { STORED_USER_NAME, STORED_ZODIAC_KEY } from "@/UI/constants";
 export default function App() {
   const [fontsLoaded] = useFonts({ Cinzel_400Regular, Cinzel_700Bold, Cinzel_600SemiBold });
 
-  const [sendRequest, setUserName, setMainZodiac, userName, mainZodiac, error, status] = useHoroscopeStore(
+  const [
+    sendMainRequest,
+    sendDailyRequest,
+    setUserName,
+    setMainZodiac,
+    userName,
+    mainZodiac,
+    error,
+    status,
+    dailyHoroscopeData,
+  ] = useHoroscopeStore(
     useShallow((state) => [
-      state.sendRequest,
+      state.sendMainRequest,
+      state.sendDailyRequest,
       state.setUserName,
       state.setMainZodiac,
       state.userName,
       state.mainZodiac,
       state.error,
       state.status,
+      state.dailyHoroscopeData,
     ])
   );
 
@@ -36,8 +48,9 @@ export default function App() {
 
   useEffect(() => {
     clearAsyncStorage();
-    sendRequest(getAllMainHoroscopes);
-  }, [sendRequest]);
+    sendMainRequest(getAllMainHoroscopes);
+    sendDailyRequest(getAllDailyHoroscopes);
+  }, [sendMainRequest]);
 
   useEffect(() => {
     const fetchData = async () => {
