@@ -19,9 +19,7 @@ export type ZodiacData = {
   index: number;
 };
 
-export type ZodiacMainResponse = {
-  [key: string]: ZodiacData;
-};
+export type ZodiacMainResponse = ZodiacData[];
 
 export type Horoscope = {
   id: string;
@@ -62,6 +60,4 @@ type HoroscopeData = {
   zodiac_compatibility_elements: ZodiacCompatibilityElement[];
 };
 
-export type ZodiacDailyResponse = {
-  [key: string]: HoroscopeData;
-};
+export type ZodiacDailyResponse = HoroscopeData[];

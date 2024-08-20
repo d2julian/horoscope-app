@@ -60,7 +60,7 @@ const createMainHoroscopeSlice: StateCreator<
     try {
       const responseData = await requestFunction();
       set({
-        generalHoroscopeData: responseData,
+        generalHoroscopeData: Object.values(responseData),
         zodiacs: mapZodiacMainResponseToHoroscopes(responseData),
         status: HttpActionKind.COMPLETED,
       });
@@ -87,7 +87,7 @@ const createDailyHoroscopeSlice: StateCreator<
     try {
       const responseData = await requestFunction();
       set({
-        dailyHoroscopeData: responseData,
+        dailyHoroscopeData: Object.values(responseData),
         status: HttpActionKind.COMPLETED,
       });
     } catch (error: any) {
