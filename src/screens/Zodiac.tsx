@@ -7,17 +7,20 @@ import { useMainHoroscope } from "@/selectors/mainZodiacSelector";
 
 import { TabView, SceneMap, TabBar, TabBarProps } from "react-native-tab-view";
 import { WINDOW_WIDTH } from "@/UI/constants";
-
-const TodayRoute = () => <Text>Hoy</Text>;
-
-const GeneralRoute = () => <Text>General</Text>;
-
-const renderScene = SceneMap({
-  TodayRoute: TodayRoute,
-  GeneralRoute: GeneralRoute,
-});
+import { useAppTheme } from "@/UI/theme";
 
 export default function Zodiac() {
+  const theme = useAppTheme();
+
+  const TodayRoute = () => <Text>Hoy</Text>;
+
+  const GeneralRoute = () => <Text>General</Text>;
+
+  const renderScene = SceneMap({
+    TodayRoute: TodayRoute,
+    GeneralRoute: GeneralRoute,
+  });
+
   const [mainZodiac, userName] = useHoroscopeStore(useShallow((state) => [state.mainZodiac, state.userName]));
   const zodiac: ZodiacData | null = mainZodiac ? useMainHoroscope(mainZodiac) : null;
 
@@ -28,7 +31,12 @@ export default function Zodiac() {
   ]);
 
   const renderTabBar = (props: TabBarProps<TabRoutes>) => (
-    <TabBar {...props} indicatorStyle={{ backgroundColor: "white" }} style={{ backgroundColor: "transparent" }} />
+    <TabBar
+      {...props}
+      tabStyle={{ borderRightWidth: 1, borderColor: theme.colors.mediumPrimary }}
+      indicatorStyle={{ backgroundColor: theme.colors.primaryContainer }}
+      style={{ backgroundColor: "transparent", padding: 10, borderWidth: 1, borderColor: "transparent" }}
+    />
   );
 
   return (
