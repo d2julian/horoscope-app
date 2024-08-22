@@ -1,11 +1,11 @@
-import { View, Text } from "react-native";
+import { Text } from "react-native";
 import React, { useState } from "react";
 import { useHoroscopeStore } from "@/store/useHoroscopeStore ";
 import { useShallow } from "zustand/react/shallow";
-import { ZodiacData } from "@/types/types";
+import { TabRoutes, ZodiacData } from "@/types/types";
 import { useMainHoroscope } from "@/selectors/mainZodiacSelector";
 
-import { TabView, SceneMap, TabBar } from "react-native-tab-view";
+import { TabView, SceneMap, TabBar, TabBarProps } from "react-native-tab-view";
 import { WINDOW_WIDTH } from "@/UI/constants";
 
 const TodayRoute = () => <Text>Hoy</Text>;
@@ -27,7 +27,7 @@ export default function Zodiac() {
     { key: "GeneralRoute", title: "General" },
   ]);
 
-  const renderTabBar = (props) => (
+  const renderTabBar = (props: TabBarProps<TabRoutes>) => (
     <TabBar {...props} indicatorStyle={{ backgroundColor: "white" }} style={{ backgroundColor: "transparent" }} />
   );
 

@@ -61,3 +61,8 @@ type HoroscopeData = {
 };
 
 export type ZodiacDailyResponse = HoroscopeData[];
+
+export type TabRoutes = {
+  key: string;
+  title: string;
+};
