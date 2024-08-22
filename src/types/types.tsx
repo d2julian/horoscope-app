@@ -4,7 +4,7 @@ type Characteristic = {
   [key: string]: string;
 };
 
-type ZodiacData = {
+export type ZodiacData = {
   all_characteristics: Characteristic[];
   attribute: string;
   dislikes: string;
@@ -19,9 +19,7 @@ type ZodiacData = {
   index: number;
 };
 
-export type ZodiacMainResponse = {
-  [key: string]: ZodiacData;
-};
+export type ZodiacMainResponse = ZodiacData[];
 
 export type Horoscope = {
   id: string;
@@ -40,3 +38,26 @@ export type ZodiacCarouselType = {
   image: ImageSourcePropType;
   index: number;
 };
+
+type LuckyElement = {
+  lucky_element: string;
+  total_stars_empty: number;
+  total_stars_filled: number;
+};
+
+type ZodiacCompatibilityElement = {
+  element: string;
+  zodiac_compatible: string;
+};
+
+type HoroscopeData = {
+  horoscope: string;
+  index: number;
+  lucky_elements: LuckyElement[];
+  timestamp: string;
+  url: string;
+  zodiac: string;
+  zodiac_compatibility_elements: ZodiacCompatibilityElement[];
+};
+
+export type ZodiacDailyResponse = HoroscopeData[];
