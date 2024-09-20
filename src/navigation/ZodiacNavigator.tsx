@@ -8,21 +8,16 @@ import { useMainHoroscope } from "@/selectors/mainZodiacSelector";
 import { TabView, SceneMap, TabBar, TabBarProps } from "react-native-tab-view";
 import { WINDOW_WIDTH } from "@/UI/constants";
 import { useAppTheme } from "@/UI/theme";
+import Today from "@/screens/Today";
+import General from "@/screens/General";
 
-export default function Zodiac() {
+export default function ZodiacNavigator() {
   const theme = useAppTheme();
 
-  const TodayRoute = () => <Text>Hoy</Text>;
-
-  const GeneralRoute = () => <Text>General</Text>;
-
   const renderScene = SceneMap({
-    TodayRoute: TodayRoute,
-    GeneralRoute: GeneralRoute,
+    TodayRoute: Today,
+    GeneralRoute: General,
   });
-
-  const [mainZodiac, userName] = useHoroscopeStore(useShallow((state) => [state.mainZodiac, state.userName]));
-  const zodiac: ZodiacData | null = mainZodiac ? useMainHoroscope(mainZodiac) : null;
 
   const [index, setIndex] = useState(0);
   const [routes] = useState([
