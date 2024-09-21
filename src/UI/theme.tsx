@@ -50,6 +50,8 @@ export const theme = {
     mood: "#2b2994",
     job: "#d4df41",
     black: "#000000",
+    lightGray: "#ccc",
+    rgbaPrimary: "76, 0, 128",
   },
 };
 
