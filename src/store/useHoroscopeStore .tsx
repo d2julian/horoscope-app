@@ -2,6 +2,7 @@ import { create, StateCreator } from "zustand";
 
 import { ZodiacDailyResponse, HttpActionKind, ZodiacCarouselType, ZodiacMainResponse } from "@/types/types";
 import { mapZodiacMainResponseToHoroscopes } from "@/selectors/mapZodiacMainResponse";
+import { mapZodiacDailyResponseToHoroscopes } from "@/selectors/mapZodiacDailyResponse";
 
 type GeneralInfoStoreType = {
   setMainZodiac: (zodiac: string) => void;
@@ -27,12 +28,7 @@ type DailyHoroscopeStoreType = {
   status: HttpActionKind | null;
 };
 
-const createGeneralHoroscopeSlice: StateCreator<
-  MainHoroscopeStoreType & GeneralInfoStoreType & DailyHoroscopeStoreType,
-  [],
-  [],
-  GeneralInfoStoreType
-> = (set) => ({
+const createGeneralHoroscopeSlice: StateCreator<MainHoroscopeStoreType & GeneralInfoStoreType & DailyHoroscopeStoreType, [], [], GeneralInfoStoreType> = (set) => ({
   userName: null,
   mainZodiac: null,
   setUserName: (name: string) => {
@@ -43,12 +39,7 @@ const createGeneralHoroscopeSlice: StateCreator<
   },
 });
 
-const createMainHoroscopeSlice: StateCreator<
-  MainHoroscopeStoreType & GeneralInfoStoreType & DailyHoroscopeStoreType,
-  [],
-  [],
-  MainHoroscopeStoreType
-> = (set) => ({
+const createMainHoroscopeSlice: StateCreator<MainHoroscopeStoreType & GeneralInfoStoreType & DailyHoroscopeStoreType, [], [], MainHoroscopeStoreType> = (set) => ({
   generalHoroscopeData: null,
   error: null,
   status: null,
@@ -71,12 +62,7 @@ const createMainHoroscopeSlice: StateCreator<
   },
 });
 
-const createDailyHoroscopeSlice: StateCreator<
-  MainHoroscopeStoreType & GeneralInfoStoreType & DailyHoroscopeStoreType,
-  [],
-  [],
-  DailyHoroscopeStoreType
-> = (set) => ({
+const createDailyHoroscopeSlice: StateCreator<MainHoroscopeStoreType & GeneralInfoStoreType & DailyHoroscopeStoreType, [], [], DailyHoroscopeStoreType> = (set) => ({
   dailyHoroscopeData: null,
   error: null,
   status: null,
@@ -87,7 +73,7 @@ const createDailyHoroscopeSlice: StateCreator<
     try {
       const responseData = await requestFunction();
       set({
-        dailyHoroscopeData: Object.values(responseData),
+        dailyHoroscopeData: mapZodiacDailyResponseToHoroscopes(responseData),
         status: HttpActionKind.COMPLETED,
       });
     } catch (error: any) {
@@ -97,10 +83,8 @@ const createDailyHoroscopeSlice: StateCreator<
   },
 });
 
-export const useHoroscopeStore = create<MainHoroscopeStoreType & GeneralInfoStoreType & DailyHoroscopeStoreType>()(
-  (...a) => ({
-    ...createGeneralHoroscopeSlice(...a),
-    ...createMainHoroscopeSlice(...a),
-    ...createDailyHoroscopeSlice(...a),
-  })
-);
+export const useHoroscopeStore = create<MainHoroscopeStoreType & GeneralInfoStoreType & DailyHoroscopeStoreType>()((...a) => ({
+  ...createGeneralHoroscopeSlice(...a),
+  ...createMainHoroscopeSlice(...a),
+  ...createDailyHoroscopeSlice(...a),
+}));

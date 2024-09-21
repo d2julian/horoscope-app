@@ -16,6 +16,11 @@ export const theme = {
     medium: 50,
     small: 25,
   },
+  height: {
+    large: 30,
+    medium: 20,
+    small: 10,
+  },
   gap: {
     large: 30,
     medium: 20,
@@ -40,6 +45,11 @@ export const theme = {
     primary: "#4c0080",
     mediumPrimary: "#8a00e6",
     lightPrimary: "#c266ff",
+    love: "#cf3367",
+    money: "#308f14",
+    mood: "#2b2994",
+    job: "#d4df41",
+    black: "#000000",
   },
 };
 

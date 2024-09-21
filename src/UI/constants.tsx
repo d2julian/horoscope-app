@@ -4,3 +4,9 @@ export const WINDOW_WIDTH = width;
 export const WINDOW_HEIGHT = height;
 export const STORED_USER_NAME = "storedName";
 export const STORED_ZODIAC_KEY = "storedZodiac";
+export const enum LUCKY_ELEMENTS {
+  Amor = "love",
+  Finanzas = "money",
+  Animo = "mood",
+  Profesión = "job",
+}

@@ -17,9 +17,7 @@ export async function getAllDailyHoroscopes(): Promise<ZodiacDailyResponse> {
   const date = new Date().toISOString();
   const dateFromString = date.substring(0, date.indexOf("T")) + "T00:00:00";
   const dateToString = date.substring(0, date.indexOf("T")) + "T23:59:59";
-  const response = await fetch(
-    `${FIREBASE_DOMAIN}/horoscope_daily.json?orderBy="timestamp"&startAt="${dateFromString}"&endAt="${dateToString}"`
-  );
+  const response = await fetch(`${FIREBASE_DOMAIN}/horoscope_daily.json?orderBy="timestamp"&startAt="${dateFromString}"&endAt="${dateToString}"`);
   const data: ZodiacDailyResponse = await response.json();
 
   if (!response.ok) {
