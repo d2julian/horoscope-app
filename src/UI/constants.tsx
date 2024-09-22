@@ -10,3 +10,18 @@ export const enum LUCKY_ELEMENTS {
   Animo = "mood",
   Profesión = "job",
 }
+
+export const enum ZODIAC_ICONS {
+  acuario = "zodiac-aquarius",
+  aries = "zodiac-aries",
+  cancer = "zodiac-cancer",
+  capricornio = "zodiac-capricorn",
+  escorpion = "zodiac-scorpio",
+  geminis = "zodiac-gemini",
+  leo = "zodiac-leo",
+  libra = "zodiac-libra",
+  piscis = "zodiac-pisces",
+  sagitario = "zodiac-sagittarius",
+  tauro = "zodiac-taurus",
+  virgo = "zodiac-virgo",
+}

@@ -17,6 +17,8 @@ export type ZodiacData = {
   weaknesses: string;
   zodiac: string;
   index: number;
+  date_from: string;
+  date_to: string;
 };
 
 export type ZodiacMainResponse = ZodiacData[];

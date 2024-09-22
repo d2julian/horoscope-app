@@ -15,6 +15,7 @@ export const theme = {
     large: 80,
     medium: 50,
     small: 25,
+    smaller: 18,
   },
   height: {
     large: 30,
@@ -30,6 +31,7 @@ export const theme = {
     largeXL: 50,
     large: 30,
     medium: 20,
+    smallXL: 15,
     small: 10,
   },
   fontSize: {
