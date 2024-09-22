@@ -71,7 +71,9 @@ export default function Today() {
             </Text>
           </View>
           <View>
-            <Icon source={ZODIAC_ICONS[zodiacProp]} color={theme.colors.onPrimary} size={20} />
+            <Text variant="bodySmall" style={{ color: theme.colors.onPrimary, fontFamily: theme.defaultMediumFont, textAlign: "justify" }}>
+              WIP
+            </Text>
           </View>
         </View>
       </View>

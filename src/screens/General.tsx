@@ -10,7 +10,7 @@ type GeneralProps = {
 export default function General({ zodiac }: GeneralProps) {
   return (
     <View>
-      <Text>Hola {zodiac}</Text>
+      <Text>WIP {zodiac}</Text>
     </View>
   );
 }
