@@ -1,6 +1,5 @@
 import { ImageBackground, StyleSheet, View } from "react-native";
 import React from "react";
-
 import ZodiacList from "@/components/ZodiacList";
 import images from "assets/images";
 

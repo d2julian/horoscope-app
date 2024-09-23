@@ -25,3 +25,9 @@ export const enum ZODIAC_ICONS {
   tauro = "zodiac-taurus",
   virgo = "zodiac-virgo",
 }
+
+export const enum COMPATIBILITY_ICONS {
+  Amor = "heart-outline",
+  Amistad = "account-check-outline",
+  Profesión = "briefcase-outline",
+}

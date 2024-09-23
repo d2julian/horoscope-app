@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { Animated, View, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { Text } from "react-native-paper";
 import { AppTheme, useAppTheme } from "@/UI/theme";
 import ZodiacItemList from "./ZodiacItemList";

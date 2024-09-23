@@ -1,10 +1,5 @@
-import { Text } from "react-native";
 import React, { useState } from "react";
-import { useHoroscopeStore } from "@/store/useHoroscopeStore ";
-import { useShallow } from "zustand/react/shallow";
-import { TabRoutes, ZodiacData } from "@/types/types";
-import { useMainHoroscope } from "@/selectors/mainZodiacSelector";
-
+import { TabRoutes } from "@/types/types";
 import { TabView, SceneMap, TabBar, TabBarProps } from "react-native-tab-view";
 import { WINDOW_WIDTH } from "@/UI/constants";
 import { useAppTheme } from "@/UI/theme";

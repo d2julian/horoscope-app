@@ -1,5 +1,4 @@
 import { create, StateCreator } from "zustand";
-
 import { ZodiacDailyResponse, HttpActionKind, ZodiacCarouselType, ZodiacMainResponse } from "@/types/types";
 import { mapZodiacMainResponseToHoroscopes } from "@/selectors/mapZodiacMainResponse";
 import { mapZodiacDailyResponseToHoroscopes } from "@/selectors/mapZodiacDailyResponse";

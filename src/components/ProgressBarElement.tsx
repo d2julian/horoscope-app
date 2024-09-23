@@ -13,7 +13,7 @@ const ProgressBarElement = ({ element, stars }: ProgressBarElementProps) => {
   const theme = useAppTheme();
   const styles = makeStyles(theme);
   return (
-    <View style={{ width: WINDOW_WIDTH / 3, marginHorizontal: 10, marginVertical: 10 }}>
+    <View style={{ width: WINDOW_WIDTH / 3, margin: theme.spacing.small }}>
       <Text style={styles.textElement}>{element}</Text>
       <ProgressBar progress={stars / 5} color={theme.colors[LUCKY_ELEMENTS[element]]} style={styles.bar} />
     </View>

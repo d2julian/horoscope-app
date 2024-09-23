@@ -25,6 +25,7 @@ export const theme = {
   gap: {
     large: 30,
     medium: 20,
+    smallXL: 15,
     small: 10,
   },
   spacing: {

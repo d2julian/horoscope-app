@@ -15,7 +15,7 @@ const Tab = createBottomTabNavigator();
 export default function ZodiacTabs() {
   const theme = useAppTheme();
   const styles = makeStyles(theme);
-  const [mainZodiac, userName] = useHoroscopeStore(useShallow((state) => [state.mainZodiac, state.userName]));
+  const [mainZodiac] = useHoroscopeStore(useShallow((state) => [state.mainZodiac, state.userName]));
   return (
     <Tab.Navigator
       screenOptions={{
