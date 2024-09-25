@@ -4,6 +4,7 @@ import NameInserting from "@/screens/NameInserting";
 import ZodiacCarousel from "@/screens/ZodiacCarousel";
 import ZodiacTabs from "./TabNavigator";
 import Zodiac from "@/navigation/ZodiacNavigator";
+import ErrorModal from "@/screens/ErrorModal";
 
 const Stack = createNativeStackNavigator();
 
@@ -45,6 +46,14 @@ function StackNavigator({ initialRouteName }: StackNavigatorProps) {
         }}
         name="Zodiac"
         component={Zodiac}
+      />
+      <Stack.Screen
+        options={{
+          headerShown: false,
+          animation: "flip",
+        }}
+        name="ErrorModal"
+        component={ErrorModal}
       />
     </Stack.Navigator>
   );

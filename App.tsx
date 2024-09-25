@@ -20,7 +20,7 @@ import { STORED_USER_NAME, STORED_ZODIAC_KEY } from "@/UI/constants";
 export default function App() {
   const [fontsLoaded] = useFonts({ Cinzel_400Regular, Cinzel_700Bold, Cinzel_600SemiBold });
 
-  const [sendMainRequest, sendDailyRequest, setUserName, setMainZodiac, userName, mainZodiac, error, status] = useHoroscopeStore(
+  const [sendMainRequest, sendDailyRequest, setUserName, setMainZodiac, userName, mainZodiac, error, status, dailyHoroscopeData] = useHoroscopeStore(
     useShallow((state) => [
       state.sendMainRequest,
       state.sendDailyRequest,
@@ -85,7 +85,11 @@ export default function App() {
         ) : (
           <NavigationContainer theme={navTheme}>
             <SafeAreaView style={styles.container}>
-              <StackNavigator initialRouteName={userName !== null && mainZodiac !== null ? "ZodiacTabs" : "NameInserting"} />
+              <StackNavigator
+                initialRouteName={
+                  HttpActionKind.COMPLETED && (error || dailyHoroscopeData?.length === 0) ? "ErrorModal" : userName !== null && mainZodiac !== null ? "ZodiacTabs" : "NameInserting"
+                }
+              />
               <StatusBar style="light" backgroundColor={theme.colors.primary} />
             </SafeAreaView>
           </NavigationContainer>
