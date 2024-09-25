@@ -11,9 +11,9 @@ module.exports = function (api) {
       [
         "module-resolver",
         {
-          root: ["./src"], // Ajusta la raíz según la estructura de tu proyecto
+          root: ["./src"],
           alias: {
-            "@": "./src", // El alias '@' mapea a la carpeta 'src'
+            "@": "./src",
           },
         },
       ],

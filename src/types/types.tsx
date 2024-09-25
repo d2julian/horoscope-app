@@ -17,6 +17,8 @@ export type ZodiacData = {
   weaknesses: string;
   zodiac: string;
   index: number;
+  date_from: string;
+  date_to: string;
 };
 
 export type ZodiacMainResponse = ZodiacData[];
@@ -50,14 +52,20 @@ type ZodiacCompatibilityElement = {
   zodiac_compatible: string;
 };
 
-type HoroscopeData = {
+export type HoroscopeData = {
   horoscope: string;
   index: number;
   lucky_elements: LuckyElement[];
   timestamp: string;
   url: string;
   zodiac: string;
+  image: ImageSourcePropType;
   zodiac_compatibility_elements: ZodiacCompatibilityElement[];
 };
 
 export type ZodiacDailyResponse = HoroscopeData[];
+
+export type TabRoutes = {
+  key: string;
+  title: string;
+};

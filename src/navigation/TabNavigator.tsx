@@ -2,17 +2,20 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import AllZodiac from "@/screens/AllZodiac";
-import Zodiac from "@/screens/Zodiac";
+import Zodiac from "@/navigation/ZodiacNavigator";
 import { AppTheme, useAppTheme } from "@/UI/theme";
 import images from "assets/images";
 import TabBarIconImage from "@/components/TabBarIconImage";
 import Compatibility from "@/screens/Compatibility";
+import { useHoroscopeStore } from "@/store/useHoroscopeStore ";
+import { useShallow } from "zustand/react/shallow";
 
 const Tab = createBottomTabNavigator();
 
 export default function ZodiacTabs() {
   const theme = useAppTheme();
   const styles = makeStyles(theme);
+  const [mainZodiac] = useHoroscopeStore(useShallow((state) => [state.mainZodiac, state.userName]));
   return (
     <Tab.Navigator
       screenOptions={{
@@ -37,6 +40,7 @@ export default function ZodiacTabs() {
           ...styles,
           tabBarIcon: ({ size, focused }) => <TabBarIconImage image={images.tarot} focused={focused} size={size} />,
         }}
+        initialParams={{ zodiacProp: mainZodiac }}
       />
       <Tab.Screen
         name="Mas Horoscopos"
@@ -51,9 +55,7 @@ export default function ZodiacTabs() {
         component={Compatibility}
         options={{
           ...styles,
-          tabBarIcon: ({ size, focused }) => (
-            <TabBarIconImage image={images.compatibilidad} focused={focused} size={size} />
-          ),
+          tabBarIcon: ({ size, focused }) => <TabBarIconImage image={images.compatibilidad} focused={focused} size={size} />,
         }}
       />
     </Tab.Navigator>

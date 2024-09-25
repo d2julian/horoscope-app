@@ -11,14 +11,15 @@ const images = {
   sagitario: require("./sagitario.png"),
   tauro: require("./tauro.png"),
   virgo: require("./virgo.png"),
-  universe: require("./bg-sky.jpg"),
   tarot: require("./tarot.png"),
+  universe: require("./bg-sky.jpg"),
   carta_de_tarot: require("./carta-de-tarot.png"),
   bola_de_cristal: require("./bola-de-cristal.png"),
   cartas_de_tarot: require("./cartas-de-tarot.png"),
   zodiacs: require("./zodiacs.png"),
   compatibilidad: require("./compatibilidad.png"),
   constelacion: require("./constelacion.png"),
+  constelacion_daily: require("./constelacion_daily.png"),
 };
 
 export default images;

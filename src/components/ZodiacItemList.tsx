@@ -1,13 +1,14 @@
 import React, { useRef } from "react";
-import { Animated, Image, ImageSourcePropType, StyleSheet, Text, TouchableWithoutFeedback, View } from "react-native";
+import { Animated, Image, ImageSourcePropType, StyleSheet, Text, TouchableWithoutFeedback } from "react-native";
 import { WINDOW_WIDTH } from "@/UI/constants";
 
 type ZodiacItemListProps = {
   image: ImageSourcePropType;
   name: string;
+  onPress: Function;
 };
 
-export default function ZodiacItemList({ image, name }: ZodiacItemListProps) {
+export default function ZodiacItemList({ image, name, onPress }: ZodiacItemListProps) {
   const scaleAnim = useRef(new Animated.Value(1)).current;
   const onPressHandlerAnimation = () => {
     Animated.timing(scaleAnim, {
@@ -23,6 +24,7 @@ export default function ZodiacItemList({ image, name }: ZodiacItemListProps) {
       duration: 50,
       useNativeDriver: true,
     }).start();
+    onPress(name);
   };
 
   return (

@@ -1,9 +1,9 @@
-// navigation/StackNavigator.tsx
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import NameInserting from "@/screens/NameInserting";
 import ZodiacCarousel from "@/screens/ZodiacCarousel";
 import ZodiacTabs from "./TabNavigator";
+import Zodiac from "@/navigation/ZodiacNavigator";
 
 const Stack = createNativeStackNavigator();
 
@@ -37,6 +37,14 @@ function StackNavigator({ initialRouteName }: StackNavigatorProps) {
         }}
         name="ZodiacTabs"
         component={ZodiacTabs}
+      />
+      <Stack.Screen
+        options={{
+          headerShown: false,
+          animation: "flip",
+        }}
+        name="Zodiac"
+        component={Zodiac}
       />
     </Stack.Navigator>
   );

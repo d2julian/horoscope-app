@@ -1,4 +1,4 @@
-import { StyleSheet, Image, ImageSourcePropType } from "react-native";
+import { Image, ImageSourcePropType } from "react-native";
 import React from "react";
 
 type TabBarIconImageProps = {
