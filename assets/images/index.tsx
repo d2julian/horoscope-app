@@ -20,6 +20,7 @@ const images = {
   compatibilidad: require("./compatibilidad.png"),
   constelacion: require("./constelacion.png"),
   constelacion_daily: require("./constelacion_daily.png"),
+  constelacion_general: require("./constelacion_general.png"),
 };
 
 export default images;
