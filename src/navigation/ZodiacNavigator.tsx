@@ -26,7 +26,7 @@ export default function ZodiacNavigator() {
       {...props}
       tabStyle={{ borderRightWidth: 1, borderColor: theme.colors.mediumPrimary }}
       indicatorStyle={{ backgroundColor: theme.colors.primaryContainer }}
-      renderLabel={({ route }) => <Text style={{ fontFamily: theme.defaultFont, color: theme.colors.onPrimary }}>{route.title}</Text>}
+      renderLabel={({ route, focused }) => <Text style={{ fontFamily: theme.defaultFont, color: focused ? theme.colors.onPrimary : theme.colors.lightGray }}>{route.title}</Text>}
       style={{ backgroundColor: "transparent", padding: 10, borderWidth: 1, borderColor: "transparent" }}
     />
   );
