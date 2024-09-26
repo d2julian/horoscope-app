@@ -1,8 +1,9 @@
 import { WINDOW_HEIGHT, WINDOW_WIDTH } from "@/UI/constants";
 import React, { useState, useRef, useEffect } from "react";
 import { StyleSheet, View, Animated, StyleProp, ViewStyle } from "react-native";
+import { Icon } from "react-native-paper";
 
-const ANIMATION_END_Y = Math.ceil(WINDOW_HEIGHT * 0.8);
+const ANIMATION_END_Y = Math.ceil(WINDOW_HEIGHT);
 const NEGATIVE_END_Y = ANIMATION_END_Y * -1;
 
 function getRandomNumber(min: number, max: number): number {
@@ -10,22 +11,15 @@ function getRandomNumber(min: number, max: number): number {
 }
 
 const Heart = () => {
-  return (
-    <View style={styles.heart}>
-      <View style={[styles.leftHeart, styles.heartShape]} />
-      <View style={[styles.rightHeart, styles.heartShape]} />
-    </View>
-  );
+  return <Icon source="heart" color="red" size={30} />;
 };
 
 type AnimatedHeartProps = {
-  onComplete: () => void;
   visible: boolean;
   style?: StyleProp<ViewStyle>;
-  onFinish: Function;
 };
 
-const AnimatedHeart = ({ onComplete, visible, style, onFinish }: AnimatedHeartProps) => {
+const AnimatedHeart = ({ visible, style }: AnimatedHeartProps) => {
   const position = useRef(new Animated.Value(0)).current;
 
   const yAnimation = position.interpolate({
@@ -40,13 +34,13 @@ const AnimatedHeart = ({ onComplete, visible, style, onFinish }: AnimatedHeartPr
 
   const scaleAnimation = yAnimation.interpolate({
     inputRange: [0, 15, 30],
-    outputRange: [0, 1.2, 1],
+    outputRange: [0, 1.5, 1],
     extrapolate: "clamp",
   });
 
   const xAnimation = yAnimation.interpolate({
     inputRange: [0, ANIMATION_END_Y / 2, ANIMATION_END_Y],
-    outputRange: [0, 15, 0],
+    outputRange: [0, 25, 0],
   });
 
   const rotateAnimation = yAnimation.interpolate({
@@ -66,13 +60,12 @@ const AnimatedHeart = ({ onComplete, visible, style, onFinish }: AnimatedHeartPr
       duration: 2000,
       toValue: NEGATIVE_END_Y,
       useNativeDriver: true,
-    }).start(onComplete);
+    }).start();
   };
 
   useEffect(() => {
     if (visible) {
       startAnimation();
-      onFinish();
     } else {
       position.setValue(0);
     }
@@ -100,7 +93,7 @@ const HeartAnimation = ({ visible, onFinishAnimation }: CompatibilityProps) => {
   const [hearts, setHearts] = useState<HeartState[]>([]);
 
   const addHearts = () => {
-    const numberOfHearts = 7;
+    const numberOfHearts = 20;
     const newHearts: HeartState[] = Array.from({ length: numberOfHearts }, () => ({
       id: Math.random(),
       right: getRandomNumber(WINDOW_WIDTH / 2 + 75, WINDOW_WIDTH / 2 - 75),
@@ -109,13 +102,10 @@ const HeartAnimation = ({ visible, onFinishAnimation }: CompatibilityProps) => {
     setHearts(newHearts);
   };
 
-  const removeHeart = (id: number) => {
-    setHearts((prevHearts) => prevHearts.filter((heart) => heart.id !== id));
-  };
-
   useEffect(() => {
     if (visible) {
       addHearts();
+      onFinishAnimation();
     }
   }, [visible]);
 
@@ -123,14 +113,13 @@ const HeartAnimation = ({ visible, onFinishAnimation }: CompatibilityProps) => {
     <View style={styles.container}>
       <View>
         {hearts.map((heart) => (
-          <AnimatedHeart key={heart.id} visible={true} onComplete={() => removeHeart(heart.id)} style={{ right: heart.right, bottom: heart.bottom }} onFinish={onFinishAnimation} />
+          <AnimatedHeart key={heart.id} visible={true} style={{ right: heart.right, bottom: heart.bottom }} />
         ))}
       </View>
     </View>
   );
 };
 
-// Estilos
 const styles = StyleSheet.create({
   container: {
     justifyContent: "flex-end",
@@ -151,28 +140,6 @@ const styles = StyleSheet.create({
   heartWrap: {
     position: "absolute",
     backgroundColor: "transparent",
-  },
-  heart: {
-    width: 50,
-    height: 50,
-    backgroundColor: "transparent",
-  },
-  heartShape: {
-    width: 30,
-    height: 45,
-    position: "absolute",
-    top: 0,
-    borderTopLeftRadius: 15,
-    borderTopRightRadius: 15,
-    backgroundColor: "red",
-  },
-  leftHeart: {
-    transform: [{ rotate: "-45deg" }],
-    left: 5,
-  },
-  rightHeart: {
-    transform: [{ rotate: "45deg" }],
-    right: 5,
   },
 });
 

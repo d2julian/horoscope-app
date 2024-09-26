@@ -22,7 +22,7 @@ export default function Compatibility() {
         <Text variant="titleLarge" style={styles.title}>
           Compatibilidad de Amor
         </Text>
-        <Pressable style={{ backgroundColor: "red", width: 200, height: 200 }} onPress={onPressHandler}>
+        <Pressable style={{ backgroundColor: "red", width: 50, height: 50 }} onPress={onPressHandler}>
           <Text>Click</Text>
         </Pressable>
       </View>
