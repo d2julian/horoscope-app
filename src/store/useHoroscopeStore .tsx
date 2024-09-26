@@ -1,5 +1,5 @@
 import { create, StateCreator } from "zustand";
-import { ZodiacDailyResponse, HttpActionKind, ZodiacCarouselType, ZodiacMainResponse } from "@/types/types";
+import { ZodiacDailyResponse, HttpActionKind, ZodiacCarouselType, ZodiacMainResponse, ZodiacCompatibility } from "@/types/types";
 import { mapZodiacMainResponseToHoroscopes } from "@/selectors/mapZodiacMainResponse";
 import { mapZodiacDailyResponseToHoroscopes } from "@/selectors/mapZodiacDailyResponse";
 
@@ -27,7 +27,20 @@ type DailyHoroscopeStoreType = {
   status: HttpActionKind | null;
 };
 
-const createGeneralHoroscopeSlice: StateCreator<MainHoroscopeStoreType & GeneralInfoStoreType & DailyHoroscopeStoreType, [], [], GeneralInfoStoreType> = (set) => ({
+type CompatibilityHoroscopeStoreType = {
+  sendCompatibilityRequest: (requestFunction: () => Promise<ZodiacCompatibility>) => Promise<void>;
+  errorMessage?: string;
+  compatibilityInfo: ZodiacCompatibility | null;
+  error: string | null;
+  status: HttpActionKind | null;
+};
+
+const createGeneralHoroscopeSlice: StateCreator<
+  MainHoroscopeStoreType & GeneralInfoStoreType & DailyHoroscopeStoreType & CompatibilityHoroscopeStoreType,
+  [],
+  [],
+  GeneralInfoStoreType
+> = (set) => ({
   userName: null,
   mainZodiac: null,
   setUserName: (name: string) => {
@@ -38,7 +51,12 @@ const createGeneralHoroscopeSlice: StateCreator<MainHoroscopeStoreType & General
   },
 });
 
-const createMainHoroscopeSlice: StateCreator<MainHoroscopeStoreType & GeneralInfoStoreType & DailyHoroscopeStoreType, [], [], MainHoroscopeStoreType> = (set) => ({
+const createMainHoroscopeSlice: StateCreator<
+  MainHoroscopeStoreType & GeneralInfoStoreType & DailyHoroscopeStoreType & CompatibilityHoroscopeStoreType,
+  [],
+  [],
+  MainHoroscopeStoreType
+> = (set) => ({
   generalHoroscopeData: null,
   error: null,
   status: null,
@@ -61,7 +79,12 @@ const createMainHoroscopeSlice: StateCreator<MainHoroscopeStoreType & GeneralInf
   },
 });
 
-const createDailyHoroscopeSlice: StateCreator<MainHoroscopeStoreType & GeneralInfoStoreType & DailyHoroscopeStoreType, [], [], DailyHoroscopeStoreType> = (set) => ({
+const createDailyHoroscopeSlice: StateCreator<
+  MainHoroscopeStoreType & GeneralInfoStoreType & DailyHoroscopeStoreType & CompatibilityHoroscopeStoreType,
+  [],
+  [],
+  DailyHoroscopeStoreType
+> = (set) => ({
   dailyHoroscopeData: null,
   error: null,
   status: null,
@@ -82,8 +105,35 @@ const createDailyHoroscopeSlice: StateCreator<MainHoroscopeStoreType & GeneralIn
   },
 });
 
-export const useHoroscopeStore = create<MainHoroscopeStoreType & GeneralInfoStoreType & DailyHoroscopeStoreType>()((...a) => ({
+const createCompatibilityHoroscopeSlice: StateCreator<
+  MainHoroscopeStoreType & GeneralInfoStoreType & DailyHoroscopeStoreType & CompatibilityHoroscopeStoreType,
+  [],
+  [],
+  CompatibilityHoroscopeStoreType
+> = (set) => ({
+  compatibilityInfo: null,
+  error: null,
+  status: null,
+
+  sendCompatibilityRequest: async (requestFunction: () => Promise<ZodiacCompatibility>) => {
+    set({ status: HttpActionKind.PENDING, error: null, generalHoroscopeData: null });
+
+    try {
+      const responseData = await requestFunction();
+      set({
+        compatibilityInfo: Object.values(responseData),
+        status: HttpActionKind.COMPLETED,
+      });
+    } catch (error: any) {
+      const errorMessage = error instanceof Error ? error.message : "Something went wrong!";
+      set({ error: errorMessage, status: HttpActionKind.COMPLETED });
+    }
+  },
+});
+
+export const useHoroscopeStore = create<MainHoroscopeStoreType & GeneralInfoStoreType & DailyHoroscopeStoreType & CompatibilityHoroscopeStoreType>()((...a) => ({
   ...createGeneralHoroscopeSlice(...a),
   ...createMainHoroscopeSlice(...a),
   ...createDailyHoroscopeSlice(...a),
+  ...createCompatibilityHoroscopeSlice(...a),
 }));

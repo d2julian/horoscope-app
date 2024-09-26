@@ -11,7 +11,7 @@ import StackNavigator from "@/navigation/StackNavigator";
 import { useShallow } from "zustand/react/shallow";
 import { theme } from "@/UI/theme";
 import images from "assets/images";
-import { getAllDailyHoroscopes, getAllMainHoroscopes } from "@/lib/api";
+import { getAllCompatibilityHoroscopes, getAllDailyHoroscopes, getAllMainHoroscopes } from "@/lib/api";
 import { useHoroscopeStore } from "@/store/useHoroscopeStore ";
 import { HttpActionKind } from "@/types/types";
 import { clearAsyncStorage, getData } from "@/store/phoneStorage";
@@ -20,25 +20,29 @@ import { STORED_USER_NAME, STORED_ZODIAC_KEY } from "@/UI/constants";
 export default function App() {
   const [fontsLoaded] = useFonts({ Cinzel_400Regular, Cinzel_700Bold, Cinzel_600SemiBold });
 
-  const [sendMainRequest, sendDailyRequest, setUserName, setMainZodiac, userName, mainZodiac, error, status, dailyHoroscopeData] = useHoroscopeStore(
-    useShallow((state) => [
-      state.sendMainRequest,
-      state.sendDailyRequest,
-      state.setUserName,
-      state.setMainZodiac,
-      state.userName,
-      state.mainZodiac,
-      state.error,
-      state.status,
-      state.dailyHoroscopeData,
-    ])
-  );
+  const [sendMainRequest, sendDailyRequest, sendCompatibilityRequest, setUserName, setMainZodiac, userName, mainZodiac, error, status, dailyHoroscopeData, compatibilityInfo] =
+    useHoroscopeStore(
+      useShallow((state) => [
+        state.sendMainRequest,
+        state.sendDailyRequest,
+        state.sendCompatibilityRequest,
+        state.setUserName,
+        state.setMainZodiac,
+        state.userName,
+        state.mainZodiac,
+        state.error,
+        state.status,
+        state.dailyHoroscopeData,
+        state.compatibilityInfo,
+      ])
+    );
 
   const [isLoadingStorageData, setIsLoadingStorageData] = useState(false);
 
   useEffect(() => {
     sendMainRequest(getAllMainHoroscopes);
     sendDailyRequest(getAllDailyHoroscopes);
+    sendCompatibilityRequest(getAllCompatibilityHoroscopes);
   }, [sendMainRequest, sendDailyRequest]);
 
   useEffect(() => {

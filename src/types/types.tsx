@@ -69,3 +69,11 @@ export type TabRoutes = {
   key: string;
   title: string;
 };
+
+export type ZodiacCompatibilityData = {
+  compatibility_info: string;
+  zodiac_from: string;
+  zodiac_to: string;
+};
+
+export type ZodiacCompatibility = ZodiacCompatibilityData[];
