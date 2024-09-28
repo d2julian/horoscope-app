@@ -7,18 +7,13 @@ type CustomButtonProps = {
   callback: (e: GestureResponderEvent) => void;
   children: React.ReactNode;
   enabled: boolean;
+  icon: string;
 };
 
-export default function CustomButton({ callback, children, enabled }: CustomButtonProps) {
+export default function CustomButton({ callback, children, enabled, icon }: CustomButtonProps) {
   const theme = useAppTheme();
   return (
-    <Button
-      mode="contained"
-      contentStyle={{ flexDirection: "row-reverse" }}
-      icon="arrow-right-bold-circle"
-      onPress={callback}
-      style={[enabled ? styles.enabled : styles.disabled]}
-    >
+    <Button mode="contained" contentStyle={{ flexDirection: "row-reverse" }} icon={icon} onPress={callback} style={[enabled ? styles.enabled : styles.disabled]}>
       <Text variant="titleMedium" style={{ color: theme.colors.onPrimary, fontFamily: theme.defaultFont }}>
         {children}
       </Text>

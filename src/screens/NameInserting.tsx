@@ -128,7 +128,7 @@ function NameInserting() {
         </View>
       </View>
       <View style={{ padding: 20, width: theme.size.largeXL }}>
-        <CustomButton callback={onPressHandler} enabled={buttonIsEnabled()}>
+        <CustomButton callback={onPressHandler} enabled={buttonIsEnabled()} icon="arrow-right-bold-circle">
           Next
         </CustomButton>
       </View>

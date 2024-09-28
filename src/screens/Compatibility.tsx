@@ -108,7 +108,7 @@ export default function Compatibility() {
         </View>
         <Animated.View style={{ flex: 1, opacity: fadeAnim }}>{showResults && <PurpleContainer title="Resultado final" iconName="heart" body={info} />}</Animated.View>
         <View style={{ marginBottom: 10 }}>
-          <CustomButton callback={onPressHandler} enabled={firstZodiacIndexSelected !== undefined && secondZodiacIndexSelected !== undefined}>
+          <CustomButton callback={onPressHandler} enabled={firstZodiacIndexSelected !== undefined && secondZodiacIndexSelected !== undefined} icon="heart">
             Click
           </CustomButton>
         </View>
