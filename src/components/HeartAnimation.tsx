@@ -126,16 +126,9 @@ const styles = StyleSheet.create({
     alignItems: "flex-end",
     height: WINDOW_HEIGHT,
     width: WINDOW_WIDTH,
-  },
-  button: {
-    backgroundColor: "#6427d1",
-    padding: 20,
-    borderRadius: 10,
-    marginBottom: 20,
-  },
-  buttonContent: {
-    justifyContent: "center",
-    alignItems: "center",
+    position: "absolute",
+    elevation: 1,
+    zIndex: 1,
   },
   heartWrap: {
     position: "absolute",
