@@ -60,17 +60,6 @@ export default function App() {
     fetchData();
   }, []);
 
-  if (HttpActionKind.COMPLETED && error) {
-    return (
-      <>
-        <Text>
-          {<Icon source="emoticon-dead-outline" size={20} color="red" />}Ha ocurrido un error {error}
-          {<Icon source="emoticon-dead-outline" size={20} color="red" />}
-        </Text>
-      </>
-    );
-  }
-
   const navTheme = {
     ...DefaultTheme,
     colors: {
