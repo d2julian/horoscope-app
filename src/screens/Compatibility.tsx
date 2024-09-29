@@ -174,7 +174,7 @@ export default function Compatibility() {
           </ScrollView>
         </View>
         <Animated.View style={{ flex: 1, opacity: fadeAnim }}>{state.showResults && <PurpleContainer title="Resultado final" iconName="heart" body={state.info} />}</Animated.View>
-        <View style={{ marginBottom: 10 }}>
+        <View style={{ marginBottom: 10, width: theme.size.largeXL, alignSelf: "center" }}>
           <CustomButton callback={onPressHandler} enabled={state.firstZodiacIndexSelected !== undefined && state.secondZodiacIndexSelected !== undefined} icon="heart">
             Consultar
           </CustomButton>
