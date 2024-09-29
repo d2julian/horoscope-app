@@ -46,7 +46,7 @@ export default function Today() {
   );
 }
 
-const makeStyles = ({ colors, defaultFont, gap, spacing }: AppTheme) =>
+const makeStyles = ({ gap, spacing }: AppTheme) =>
   StyleSheet.create({
     container: {
       marginTop: spacing.medium,

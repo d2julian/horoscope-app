@@ -80,20 +80,14 @@ export default function ZodiacCarousel() {
         })}
         data={zodiacs}
         renderItem={({ index, item }) => (
-          <ZodiacItem
-            index={index}
-            image={item.image}
-            name={item.name}
-            isSelected={zodiacIndexSelected === index}
-            onPressHandler={onPressHandler}
-          />
+          <ZodiacItem index={index} image={item.image} name={item.name} isSelected={zodiacIndexSelected === index} onPressHandler={onPressHandler} />
         )}
       />
       <HelperText type="error" style={{ fontWeight: "bold" }} visible={inputHasErrors()}>
         {errorInput}
       </HelperText>
       <View style={{ padding: 20, width: theme.size.largeXL }}>
-        <CustomButton callback={onPressButtonHandler} enabled={buttonIsEnabled()}>
+        <CustomButton callback={onPressButtonHandler} enabled={buttonIsEnabled()} icon="arrow-right-bold-circle">
           Next
         </CustomButton>
       </View>
