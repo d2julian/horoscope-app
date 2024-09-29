@@ -1,17 +1,7 @@
 module.exports = {
-  extends: [
-    "expo",
-    "prettier",
-    "eslint:recommended",
-    "plugin:@typescript-eslint/recommended",
-    "prettier",
-    "plugin:prettier/recommended",
-  ],
+  extends: ["expo", "prettier", "eslint:recommended", "plugin:@typescript-eslint/recommended", "plugin:prettier/recommended"],
   plugins: ["prettier"],
   rules: {
-    "prettier/prettier": "error",
-    {
-      "endOfLine": "auto"
-    }
+    "prettier/prettier": ["error", { endOfLine: "auto" }],
   },
 };

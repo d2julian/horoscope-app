@@ -3,7 +3,7 @@ import { View, Text, Pressable, ImageSourcePropType, StyleSheet, Image } from "r
 import { AppTheme, useAppTheme } from "@/UI/theme";
 import { WINDOW_WIDTH } from "@/UI/constants";
 
-type ZodiacItemCompatibility = {
+type ZodiacItemCompatibilityProps = {
   index: number;
   name: string;
   image: ImageSourcePropType;
@@ -11,7 +11,7 @@ type ZodiacItemCompatibility = {
   onPress: Function;
 };
 
-const ZodiacItemCompatibility = ({ index, name, image, isSelected, onPress }: ZodiacItemCompatibility) => {
+const ZodiacItemCompatibility = ({ index, name, image, isSelected, onPress }: ZodiacItemCompatibilityProps) => {
   const theme = useAppTheme();
   const styles = makeStyles(theme);
   const onPressHandler = () => {

@@ -1,6 +1,5 @@
 import { useAppTheme } from "@/UI/theme";
 import React from "react";
-import { View } from "react-native";
 import { Modal } from "react-native-paper";
 import { Text } from "react-native-paper";
 

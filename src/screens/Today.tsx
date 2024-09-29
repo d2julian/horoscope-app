@@ -1,4 +1,4 @@
-import { View, Image, ImageBackground, StyleSheet, ScrollView } from "react-native";
+import { View, ImageBackground, StyleSheet, ScrollView } from "react-native";
 import { Icon, Text } from "react-native-paper";
 import React from "react";
 import { RouteProp, useRoute } from "@react-navigation/native";
@@ -8,7 +8,6 @@ import ProgressBarElement from "@/components/ProgressBarElement";
 import { AppTheme, useAppTheme } from "@/UI/theme";
 import { useMainHoroscope } from "@/selectors/mainZodiacSelector";
 import images from "assets/images";
-import { ZODIAC_ICONS } from "@/UI/constants";
 import { useHoroscopeStore } from "@/store/useHoroscopeStore ";
 import ZodiacCompatible from "@/components/ZodiacCompatible";
 import ZodiacHeader from "@/components/ZodiacHeader";
@@ -24,8 +23,13 @@ export default function Today() {
   const styles = makeStyles(theme);
   const route = useRoute<ZodiacRouteProp>();
   const { zodiacProp } = route.params;
-  const zodiacDailyData: HoroscopeData | null = zodiacProp ? useDailyHoroscope(zodiacProp) : null;
-  const zodiacGeneralData: ZodiacData | null = zodiacProp ? useMainHoroscope(zodiacProp) : null;
+
+  const dailyData: HoroscopeData | null = useDailyHoroscope(zodiacProp);
+  const zodiacDailyData = zodiacProp ? dailyData : null;
+
+  const generalData: ZodiacData | null = useMainHoroscope(zodiacProp);
+  const zodiacGeneralData = zodiacProp ? generalData : null;
+
   const allZodiacs = useHoroscopeStore((state) => state.zodiacs);
 
   const date = new Date(zodiacDailyData?.timestamp);

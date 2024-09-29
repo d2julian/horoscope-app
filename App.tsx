@@ -1,9 +1,9 @@
 // App.tsx
 import React, { useEffect, useState } from "react";
-import { ActivityIndicator, ImageBackground, Text, View } from "react-native";
+import { ActivityIndicator, ImageBackground, View } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet } from "react-native";
-import { Icon, PaperProvider } from "react-native-paper";
+import { PaperProvider } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import { useFonts, Cinzel_400Regular, Cinzel_700Bold, Cinzel_600SemiBold } from "@expo-google-fonts/cinzel";
@@ -20,22 +20,22 @@ import { STORED_USER_NAME, STORED_ZODIAC_KEY } from "@/UI/constants";
 export default function App() {
   const [fontsLoaded] = useFonts({ Cinzel_400Regular, Cinzel_700Bold, Cinzel_600SemiBold });
 
-  const [sendMainRequest, sendDailyRequest, sendCompatibilityRequest, setUserName, setMainZodiac, userName, mainZodiac, error, status, dailyHoroscopeData, compatibilityInfo] =
-    useHoroscopeStore(
-      useShallow((state) => [
-        state.sendMainRequest,
-        state.sendDailyRequest,
-        state.sendCompatibilityRequest,
-        state.setUserName,
-        state.setMainZodiac,
-        state.userName,
-        state.mainZodiac,
-        state.error,
-        state.status,
-        state.dailyHoroscopeData,
-        state.compatibilityInfo,
-      ])
-    );
+  const [sendMainRequest, sendDailyRequest, sendCompatibilityRequest, setUserName, setMainZodiac, userName, mainZodiac, error, status, dailyHoroscopeData] = useHoroscopeStore(
+    useShallow((state) => [
+      state.sendMainRequest,
+      state.sendDailyRequest,
+      state.sendCompatibilityRequest,
+      state.setUserName,
+      state.setMainZodiac,
+      state.userName,
+      state.mainZodiac,
+      state.error,
+      state.status,
+      state.dailyHoroscopeData,
+    ])
+  );
+
+  clearAsyncStorage();
 
   const [isLoadingStorageData, setIsLoadingStorageData] = useState(false);
 

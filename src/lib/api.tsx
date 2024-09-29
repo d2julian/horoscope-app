@@ -1,7 +1,7 @@
 import auth from "../../firebaseConfig";
 import { signInAnonymously } from "firebase/auth";
-const FIREBASE_DOMAIN = process.env.EXPO_PUBLIC_FIREBASE_URL;
 import { ZodiacCompatibility, ZodiacDailyResponse, ZodiacMainResponse } from "@/types/types";
+const FIREBASE_DOMAIN = process.env.EXPO_PUBLIC_FIREBASE_URL;
 
 export async function getAllMainHoroscopes(): Promise<ZodiacMainResponse> {
   const token = await getUser();
@@ -48,7 +48,7 @@ const getUser = async () => {
     const token = await user.getIdToken();
     return token;
   } catch (error) {
-    throw new Error("Error getting user");
+    throw new Error("Error getting user: " + error);
   }
 };
 
