@@ -3,13 +3,13 @@ import React from "react";
 import { AppTheme, useAppTheme } from "@/UI/theme";
 import { Text, Icon } from "react-native-paper";
 
-type PurpleContainer = {
+type PurpleContainerProps = {
   iconName: string;
   title: string;
   body?: string;
 };
 
-const PurpleContainer = ({ iconName, title, body }: PurpleContainer) => {
+const PurpleContainer = ({ iconName, title, body }: PurpleContainerProps) => {
   const theme = useAppTheme();
   const styles = makeStyles(theme);
   return (

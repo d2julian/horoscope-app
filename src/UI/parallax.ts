@@ -47,36 +47,13 @@ export function parallaxLayout(baseConfig: TBaseConfig) {
 
   return (value: number) => {
     "worklet";
-    const translateY = interpolate(
-      value,
-      [-1, 0, 1],
-      [-size + parallaxScrollingOffset, 0, size - parallaxScrollingOffset]
-    );
+    const translateY = interpolate(value, [-1, 0, 1], [-size + parallaxScrollingOffset, 0, size - parallaxScrollingOffset]);
 
-    const translateX = interpolate(
-      value,
-      [-1, 0, 1, 2],
-      [-size * 0.2, 0, 0, -size * 0.2]
-    );
+    const translateX = interpolate(value, [-1, 0, 1, 2], [-size * 0.2, 0, 0, -size * 0.2]);
 
-    const zIndex = interpolate(
-      value,
-      [-1, 0, 1, 2],
-      [0, size, size, 0],
-      Extrapolate.CLAMP
-    );
+    const zIndex = interpolate(value, [-1, 0, 1, 2], [0, size, size, 0], Extrapolate.CLAMP);
 
-    const scale = interpolate(
-      value,
-      [-1, 0, 1, 2],
-      [
-        parallaxAdjacentItemScale,
-        parallaxScrollingScale,
-        parallaxScrollingScale,
-        parallaxAdjacentItemScale,
-      ],
-      Extrapolate.CLAMP
-    );
+    const scale = interpolate(value, [-1, 0, 1, 2], [parallaxAdjacentItemScale, parallaxScrollingScale, parallaxScrollingScale, parallaxAdjacentItemScale], Extrapolate.CLAMP);
 
     const transform = {
       transform: [
@@ -94,11 +71,7 @@ export function parallaxLayout(baseConfig: TBaseConfig) {
     };
 
     return {
-      ...withAnchorPoint(
-        transform,
-        { x: 0.5, y: 0.5 },
-        { width: size, height: size }
-      ),
+      ...withAnchorPoint(transform, { x: 0.5, y: 0.5 }, { width: size, height: size }),
       zIndex,
     };
   };
