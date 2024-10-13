@@ -14,7 +14,7 @@ import images from "assets/images";
 import { getAllCompatibilityHoroscopes, getAllDailyHoroscopes, getAllMainHoroscopes } from "@/lib/api";
 import { useHoroscopeStore } from "@/store/useHoroscopeStore ";
 import { HttpActionKind } from "@/types/types";
-import { clearAsyncStorage, getData } from "@/store/phoneStorage";
+import { getData } from "@/store/phoneStorage";
 import { STORED_USER_NAME, STORED_ZODIAC_KEY } from "@/UI/constants";
 
 export default function App() {
@@ -34,8 +34,6 @@ export default function App() {
       state.dailyHoroscopeData,
     ])
   );
-
-  clearAsyncStorage();
 
   const [isLoadingStorageData, setIsLoadingStorageData] = useState(false);
 
